@@ -3,13 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class User {
+class User implements UserInterface{
     protected $id;
     protected $name;
     protected $surname;
     protected $mail;
-    protected $nickname;
+    protected $roles;
+    protected $username;
     protected $password;
     protected $salt = "";
     protected $createdAt;
@@ -22,6 +24,7 @@ class User {
 
     function __construct()
     {
+        $this->roles = ['ROLE_USER'];
         $this->userSkillsValidation = new ArrayCollection();
         $this->skillsUser = new ArrayCollection();
     }
@@ -66,14 +69,24 @@ class User {
         $this->mail = $mail;
     }
 
-    public function getNickname()
+    public function getUsername()
     {
-        return $this->nickname;
+        return $this->username;
     }
 
-    public function setNickname($nickname)
+    public function setUsername($username)
     {
-        $this->nickname = $nickname;
+        $this->username = $username;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     public function getPassword()
@@ -84,16 +97,6 @@ class User {
     public function setPassword($password)
     {
         $this->password = $password;
-    }
-
-    public function getIdCategoryUser()
-    {
-        return $this->idCategoryUser;
-    }
-
-    public function setIdCategoryUser($idCategoryUser)
-    {
-        $this->idCategoryUser = $idCategoryUser;
     }
 
     public function getCreatedAt()
@@ -126,52 +129,39 @@ class User {
         $this->salt = $salt;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getUserSkillsValidation()
     {
         return $this->userSkillsValidation;
     }
 
-    /**
-     * @param ArrayCollection $userSkillsValidation
-     */
     public function setUserSkillsValidation($userSkillsValidation)
     {
         $this->userSkillsValidation = $userSkillsValidation;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getSkillsUser()
     {
         return $this->skillsUser;
     }
 
-    /**
-     * @param ArrayCollection $skillsUser
-     */
     public function setSkillsUser($skillsUser)
     {
         $this->skillsUser = $skillsUser;
     }
 
-    /**
-     * @return mixed
-     */
     public function getUserCategory()
     {
         return $this->userCategory;
     }
 
-    /**
-     * @param mixed $userCategory
-     */
     public function setUserCategory($userCategory)
     {
         $this->userCategory = $userCategory;
+    }
+
+    public function eraseCredentials()
+    {
+        $this->password = null;
     }
 
 }
