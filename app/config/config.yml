@@ -27,6 +27,9 @@ framework:
 
 # Twig Configuration
 twig:
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
+
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
