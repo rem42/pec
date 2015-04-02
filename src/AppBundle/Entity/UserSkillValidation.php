@@ -5,18 +5,18 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 
-class UserSkillValidation {
+class UserSkillValidation
+{
 
     protected $id;
     protected $validationDate;
 
     //Mapping
-    protected $userSkills;
-    protected $users;
+    protected $userSkill;
+    protected $user;
 
-    public function __construct(){
-        $this->userSkills = new ArrayCollection();
-        $this->users = new ArrayCollection();
+    public function __construct()
+    {
     }
 
     /**
@@ -52,36 +52,35 @@ class UserSkillValidation {
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getUserSkills()
+    public function getUserSkill()
     {
-        return $this->userSkills;
+        return $this->userSkill;
     }
 
     /**
-     * @param ArrayCollection $userSkills
+     * @param mixed $userSkill
      */
-    public function setUserSkills($userSkills)
+    public function setUserSkill($userSkill)
     {
-        $this->userSkills = $userSkills;
+        $this->userSkill = $userSkill;
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getUsers()
+    public function getUser()
     {
-        return $this->users;
+        return $this->user;
     }
 
     /**
-     * @param ArrayCollection $users
+     * @param mixed $user
      */
-    public function setUsers($users)
+    public function setUser($user)
     {
-        $this->users = $users;
+        $this->user = $user;
     }
-
 
 }
