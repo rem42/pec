@@ -5,17 +5,17 @@
 
     <entity name="AppBundle\Entity\User" table="user">
         <indexes>
-            <index columns="nickname"/>
+            <index columns="username"/>
             <index columns="mail"/>
         </indexes>
         <unique-constraints>
-            <unique-constraint columns="nickname" />
+            <unique-constraint columns="username" />
             <unique-constraint columns="mail" />
         </unique-constraints>
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
-        <field name="nickname" column="nickname" type="string" length="100" />
+        <field name="username" column="username" type="string" length="100" />
         <field name="password" column="password" type="string" length="100" />
         <field name="mail" column="mail" type="string" length="100" />
         <field name="salt" column="salt" type="string" length="100" nullable="true" />

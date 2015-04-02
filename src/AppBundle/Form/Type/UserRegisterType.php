@@ -11,7 +11,7 @@ class UserRegisterType extends AbstractType{
     {
         $builder->add('name', 'text')
             ->add('surname', 'text')
-            ->add('nickname', 'text')
+            ->add('username', 'text')
             ->add('mail', 'email')
             ->add('password', 'repeated', array(
                 'type' => 'password',

@@ -4,11 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="app_homepage" path="/hello/{name}">
+    <route id="app_homepage" path="/">
         <default key="_controller">AppBundle:Default:index</default>
     </route>
 
     <route id="register" path="/inscription">
         <default key="_controller">AppBundle:User:register</default>
     </route>
+
+    <route id="login" path="/connexion">
+        <default key="_controller">AppBundle:Security:login</default>
+    </route>
+
+    <route id="login_check" path="/connexion_check"></route>
+    <route id="logout" path="/deconnexion"></route>
 </routes>
