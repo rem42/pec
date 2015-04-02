@@ -18,10 +18,12 @@ class User {
     // Mapping
     protected $userCategory;
     protected $userSkillsValidation;
+    protected $skillsUser;
 
     function __construct()
     {
         $this->userSkillsValidation = new ArrayCollection();
+        $this->skillsUser = new ArrayCollection();
     }
 
     public function getId()
@@ -138,6 +140,38 @@ class User {
     public function setUserSkillsValidation($userSkillsValidation)
     {
         $this->userSkillsValidation = $userSkillsValidation;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSkillsUser()
+    {
+        return $this->skillsUser;
+    }
+
+    /**
+     * @param ArrayCollection $skillsUser
+     */
+    public function setSkillsUser($skillsUser)
+    {
+        $this->skillsUser = $skillsUser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserCategory()
+    {
+        return $this->userCategory;
+    }
+
+    /**
+     * @param mixed $userCategory
+     */
+    public function setUserCategory($userCategory)
+    {
+        $this->userCategory = $userCategory;
     }
 
 }

@@ -15,6 +15,10 @@
             <join-column name="user_id" />
         </many-to-one>
 
+        <many-to-one field="userSkill" target-entity="SkillUser" inversed-by="userSkillsValidation">
+            <join-column name="skill_user_id"></join-column>
+        </many-to-one>
+
     </entity>
 
 </doctrine-mapping>

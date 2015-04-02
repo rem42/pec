@@ -12,8 +12,18 @@
         <field name="dateStart" column="date_start" type="date" />
         <field name="dateEnd" column="date_end" type="date" />
 
+        <one-to-many field="userSkillsValidation" target-entity="UserSkillValidation" mapped-by="userSkill">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+
         <many-to-one field="skill" target-entity="Skill" inversed-by="skillsUser">
             <join-column name="skill_id"></join-column>
+        </many-to-one>
+
+        <many-to-one field="user" target-entity="User" inversed-by="skillsUser" >
+            <join-column name="user_id" />
         </many-to-one>
 
     </entity>

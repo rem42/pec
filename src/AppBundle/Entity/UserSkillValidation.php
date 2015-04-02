@@ -83,4 +83,5 @@ class UserSkillValidation
         $this->user = $user;
     }
 
+
 }
