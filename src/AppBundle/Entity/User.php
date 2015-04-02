@@ -14,7 +14,7 @@ class User {
     protected $updatedAt;
 
     // Mapping
-    protected $idCategoryUser;
+    protected $categoryUser;
 
     function __construct()
     {

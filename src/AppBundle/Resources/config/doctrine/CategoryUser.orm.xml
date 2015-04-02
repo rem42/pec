@@ -15,7 +15,7 @@
         </id>
         <field name="name" column="name" type="string" length="100" />
 
-        <one-to-many field="users" target-entity="User" mapped-by="idCategoryUser" />
+        <one-to-many field="users" target-entity="User" mapped-by="categoryUser" />
 
     </entity>
 </doctrine-mapping>
