@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 
-class CategoryUser {
+class UserCategory {
     protected $id;
     protected $name;
 
