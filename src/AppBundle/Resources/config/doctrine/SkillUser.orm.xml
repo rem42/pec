@@ -3,21 +3,17 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="AppBundle\Entity\Skill" table="skill">
+    <entity name="AppBundle\Entity\SkillUser" table="skill_user">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
-        <field name="name" column="name" type="string" length="255" />
 
-        <one-to-many field="skillsUser" target-entity="SkillUser" mapped-by="skill">
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-        </one-to-many>
+        <field name="dateStart" column="date_start" type="date" />
+        <field name="dateEnd" column="date_end" type="date" />
 
-        <many-to-one field="skillCategory" target-entity="SkillCategory" inversed-by="skills">
-                <join-column name="skill_category_id"></join-column>
+        <many-to-one field="skill" target-entity="Skill" inversed-by="skillsUser">
+            <join-column name="skill_id"></join-column>
         </many-to-one>
 
     </entity>
