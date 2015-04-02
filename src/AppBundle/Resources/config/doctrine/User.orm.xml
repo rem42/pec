@@ -1,0 +1,28 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="AppBundle\Entity\User" table="user">
+        <indexes>
+            <index columns="nickname"/>
+            <index columns="mail"/>
+        </indexes>
+        <unique-constraints>
+            <unique-constraint columns="nickname" />
+            <unique-constraint columns="mail" />
+        </unique-constraints>
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="nickname" column="nickname" type="string" length="100" />
+        <field name="password" column="password" type="string" length="100" />
+        <field name="mail" column="mail" type="string" length="100" />
+        <field name="salt" column="salt" type="string" length="100" nullable="true" />
+        <field name="createdAt" column="created_at" type="datetime" nullable="true" />
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
+
+        <one-to-many field="idCategoryUser" target-entity="CategoryUser" mapped-by="user" />
+
+    </entity>
+</doctrine-mapping>

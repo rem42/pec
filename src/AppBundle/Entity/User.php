@@ -1,17 +1,18 @@
 <?php
 
-namespace \AppBundle\Entity\User;
+namespace AppBundle\Entity\User;
 
 class User {
-    private $id;
-    private $name;
-    private $surname;
-    private $mail;
-    private $nickname;
-    private $password;
-    private $dateRegister;
-    private $dateConnection;
-    private $idCategoryUser;
+    protected $id;
+    protected $name;
+    protected $surname;
+    protected $mail;
+    protected $nickname;
+    protected $password;
+    protected $salt = "";
+    protected $createdAt;
+    protected $updatedAt;
+    protected $idCategoryUser;
 
     function __construct()
     {
@@ -78,26 +79,6 @@ class User {
         $this->password = $password;
     }
 
-    public function getDateRegister()
-    {
-        return $this->dateRegister;
-    }
-
-    public function setDateRegister($dateRegister)
-    {
-        $this->dateRegister = $dateRegister;
-    }
-
-    public function getDateConnection()
-    {
-        return $this->dateConnection;
-    }
-
-    public function setDateConnection($dateConnection)
-    {
-        $this->dateConnection = $dateConnection;
-    }
-
     public function getIdCategoryUser()
     {
         return $this->idCategoryUser;
@@ -106,5 +87,35 @@ class User {
     public function setIdCategoryUser($idCategoryUser)
     {
         $this->idCategoryUser = $idCategoryUser;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
     }
 }
