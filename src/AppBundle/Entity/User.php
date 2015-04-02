@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class User {
     protected $id;
     protected $name;
@@ -15,10 +17,11 @@ class User {
 
     // Mapping
     protected $userCategory;
+    protected $userSkillsValidation;
 
     function __construct()
     {
-
+        $this->userSkillsValidation = new ArrayCollection();
     }
 
     public function getId()
@@ -120,4 +123,21 @@ class User {
     {
         $this->salt = $salt;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getUserSkillsValidation()
+    {
+        return $this->userSkillsValidation;
+    }
+
+    /**
+     * @param ArrayCollection $userSkillsValidation
+     */
+    public function setUserSkillsValidation($userSkillsValidation)
+    {
+        $this->userSkillsValidation = $userSkillsValidation;
+    }
+
 }
