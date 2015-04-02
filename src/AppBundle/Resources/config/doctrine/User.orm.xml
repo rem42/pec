@@ -22,7 +22,7 @@
         <field name="createdAt" column="created_at" type="datetime" nullable="true" />
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
 
-        <one-to-many field="idCategoryUser" target-entity="CategoryUser" mapped-by="user" />
+        <many-to-one field="idCategoryUser" target-entity="CategoryUser" inversed-by="users" />
 
     </entity>
 </doctrine-mapping>

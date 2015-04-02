@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\User;
+namespace AppBundle\Entity;
 
 class User {
     protected $id;
@@ -12,6 +12,8 @@ class User {
     protected $salt = "";
     protected $createdAt;
     protected $updatedAt;
+
+    // Mapping
     protected $idCategoryUser;
 
     function __construct()
