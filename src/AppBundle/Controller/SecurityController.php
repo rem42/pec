@@ -23,7 +23,7 @@ class SecurityController extends Controller {
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
-        print_r($error);
+
         return $this->render('AppBundle:Security:login.html.twig', array(
             // last username entered by the user
             'form' => $form->createView(),
