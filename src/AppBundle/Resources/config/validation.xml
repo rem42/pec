@@ -32,4 +32,10 @@
             <constraint name="DateTime" />
         </property>
     </class>
+    <class name="AppBundle\Entity\UserCategory">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">name</option>
+            <option name="message">Cette catégorie d'utilisateur existe déjà</option>
+        </constraint>
+    </class>
 </constraint-mapping>
