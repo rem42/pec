@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="GereTaColoc\AppBundle\Entity\User">
+    <class name="AppBundle\Entity\User">
         <property name="password">
             <constraint name="NotBlank"/>
             <constraint name="Length">
@@ -31,5 +31,15 @@
         <property name="createdAt">
             <constraint name="DateTime" />
         </property>
+    </class>
+
+    <class name="AppBundle\Entity\SkillCategory">
+        <property name="name">
+            <constraint name="NotBlank"/>
+        </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">name</option>
+            <option name="message">Cette catégorie de compétence existe déja.</option>
+        </constraint>
     </class>
 </constraint-mapping>

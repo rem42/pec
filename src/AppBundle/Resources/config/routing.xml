@@ -16,6 +16,10 @@
         <default key="_controller">AppBundle:Security:login</default>
     </route>
 
+    <route id="addskillcategory" path="/ajoutercategoriecompetence">
+        <default key="_controller">AppBundle:SkillCategory:add</default>
+    </route>
+
     <route id="login_check" path="/connexion_check"></route>
     <route id="logout" path="/deconnexion"></route>
 </routes>
