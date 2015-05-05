@@ -2,11 +2,7 @@
 
 namespace AppBundle\Controller;
 
-
-use AppBundle\Entity\User;
-use AppBundle\Form\Type\UserLoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\CsrfFormLoginBundle\Form\UserLoginFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 
