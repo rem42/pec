@@ -32,7 +32,9 @@ class UserController extends Controller{
         ));
     }
 
-    /*public function profileAction(){
-        return $this->render('AppBundle:User:profile.html.twig', array());
-    }*/
+    public function profileAction(){
+        return $this->render('AppBundle:User:profil.html.twig', array(
+
+        ));
+    }
 }

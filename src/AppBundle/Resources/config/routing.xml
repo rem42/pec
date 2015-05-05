@@ -23,7 +23,10 @@
 
     <route id="userCategoryAdd" path="/add">
         <default key="_controller">AppBundle:UserCategory:add</default>
+    </route>
 
+    <route id="profil" path="/profil">
+        <default key="_controller">AppBundle:User:profile</default>
     </route>
 
     <route id="login_check" path="/connexion_check"></route>

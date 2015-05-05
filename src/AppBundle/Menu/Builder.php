@@ -15,6 +15,7 @@ class Builder extends ContainerAware
 
         if($this->container->get('security.context')->isGranted('ROLE_USER')) {
             $menu->addChild('Profil');
+            $menu['Profil']->addChild('Mon profil', array('route' => 'profil'));
             $menu['Profil']->addChild('Deconnexion', array('route' => 'logout'));
         }
         else {
