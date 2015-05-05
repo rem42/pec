@@ -2,7 +2,25 @@
 
 {% block body %}
 
-    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-    {{ form(form) }}
+
+	{% if error %}
+		<div>{{ error.message }}</div>
+	{% endif %}
+
+	<form action="{{ path('login_check') }}" method="post">
+		<label for="username">Login :</label>
+		<input type="text" id="username" name="username" value="{{ last_username }}" />
+
+		<label for="password">Mot de passe :</label>
+		<input type="password" id="password" name="password" />
+
+		{#
+			Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de succès
+			(plus de détails ci-dessous)
+			<input type="hidden" name="_target_path" value="/account" />
+		#}
+
+		<button type="submit">login</button>
+	</form>
 
 {% endblock %}
