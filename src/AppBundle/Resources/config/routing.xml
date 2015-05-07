@@ -21,23 +21,23 @@
         <default key="_controller">AppBundle:SkillCategory:add</default>
     </route>
 
-    <route id="userSkills" path="/utilisateur/mesCompetences">
+    <route id="userSkills" path="/utilisateur/competences">
         <default key="_controller">AppBundle:SkillUser:list</default>
     </route>
 
-    <route id="userSkillDelete" path="/utilisateur/mesCompetences/supprimer/{id}">
+    <route id="userSkillDelete" path="/utilisateur/competences/supprimer/{id}">
         <default key="_controller">AppBundle:SkillUser:delete</default>
     </route>
 
-    <route id="userSkillEdit" path="/utilisateur/mesCompetences/modifier/{id}">
+    <route id="userSkillEdit" path="/utilisateur/competences/modifier/{id}">
         <default key="_controller">AppBundle:SkillUser:edit</default>
     </route>
 
-    <route id="userCategoryAdd" path="/utilisateur/AjoutUserCategorie">
+    <route id="userCategoryAdd" path="/utilisateur/ajoutusercategorie">
         <default key="_controller">AppBundle:UserCategory:add</default>
     </route>
 
-    <route id="profil" path="/utilisateur/monProfil">
+    <route id="profil" path="/utilisateur/profil">
         <default key="_controller">AppBundle:User:profile</default>
     </route>
 
