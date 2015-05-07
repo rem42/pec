@@ -24,7 +24,10 @@ class SkillCategoryController extends Controller{
             return $this->redirect($this->generateUrl('home'));
         }
 
+        $skillcategories = $this->get('appbundle.repository.skillcategory')->liste();
+
         return $this->render('AppBundle:SkillCategory:add.html.twig', array(
+            'skillcategories' => $skillcategories,
             'form' => $form->createView(),
         ));
     }

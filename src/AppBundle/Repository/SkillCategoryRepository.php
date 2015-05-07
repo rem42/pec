@@ -13,6 +13,9 @@ class SkillCategoryRepository{
         $this->entityManager = $entityManager;
     }
 
+    public function liste(){
+        return $this->entityManager->getRepository('AppBundle:SkillCategory')->findAll();
+    }
 
     public function save(SkillCategory $skillCategory){
         $this->entityManager->persist($skillCategory);
