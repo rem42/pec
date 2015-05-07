@@ -35,10 +35,9 @@ class Builder extends ContainerAware
                 ->setAttribute('dropdown', true)
                 ->setAttribute('icon', 'fa fa-user');
 
-            $menu['User']->addChild('Mon profil', array('route' => 'profil'))
-                ->setAttribute('icon', 'fa fa-edit');
+            $menu['User']->addChild('Mon profil', array('route' => 'profil'));
             $menu['User']->addChild('Deconnexion', array('route' => 'logout'))
-                ->setAttribute('icon', 'fa fa-edit');
+                ->setAttribute('icon', 'fa fa-sign-out ');
         }
 
 
