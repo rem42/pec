@@ -2,6 +2,15 @@
 
 {% block body %}
 
+    <h1>Liste des catégories de compétences</h1>
+    <ul>
+        {% for skillcategory in skillcategories %}
+            <li>{{ skillcategory.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Ajouter une catégories de compétence</h2>
+
     {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
     {{ form(form) }}
 

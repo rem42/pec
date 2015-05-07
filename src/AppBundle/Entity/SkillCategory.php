@@ -64,5 +64,8 @@ class SkillCategory {
         $this->skills = $skills;
     }
 
+    public function __tostring(){
+        return $this->getName();
+    }
 
 } 

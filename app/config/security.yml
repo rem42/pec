@@ -7,12 +7,12 @@ security:
                 login_path: /
                 check_path: /connexion_check
             logout:
-                path:   /deconnexion
+                path:   /utilisateur/deconnexion
                 target: /
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/restricted, roles: ROLE_USER }
+        - { path: ^/utilisateur, roles: ROLE_USER }
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER

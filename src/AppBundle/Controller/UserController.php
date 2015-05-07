@@ -87,4 +87,10 @@ class UserController extends Controller{
             'formChangePersonalData' => $formChangePersonalData->createView(),
         ));
     }
+
+    public function profilePublicAction($id){
+        return $this->render('AppBundle:User:profilePublic.html.twig', array(
+
+        ));
+    }
 }

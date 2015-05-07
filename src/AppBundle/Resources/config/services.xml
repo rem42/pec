@@ -11,6 +11,14 @@
             <argument id="doctrine.orm.entity_manager" type="service"/>
         </service>
 
+        <service class="AppBundle\Repository\SkillRepository" id="appbundle.repository.skill">
+            <argument id="doctrine.orm.entity_manager" type="service"/>
+        </service>
+
+        <service class="AppBundle\Repository\SkillUserRepository" id="appbundle.repository.skilluser">
+            <argument id="doctrine.orm.entity_manager" type="service"/>
+        </service>
+
         <service class="AppBundle\Repository\SkillCategoryRepository" id="appbundle.repository.skillcategory">
             <argument id="doctrine.orm.entity_manager" type="service"/>
         </service>

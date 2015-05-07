@@ -2,10 +2,10 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\SkillCategory;
+use AppBundle\Entity\Skill;
 use Doctrine\ORM\EntityManager;
 
-class SkillCategoryRepository{
+class SkillRepository{
     private $entityManager;
 
     public function __construct(EntityManager $entityManager)
@@ -14,12 +14,12 @@ class SkillCategoryRepository{
     }
 
     public function liste(){
-        return $this->entityManager->getRepository('AppBundle:SkillCategory')->findAll();
+        return $this->entityManager->getRepository('AppBundle:Skill')->findAll();
     }
 
-    public function save(SkillCategory $skillCategory){
-        $this->entityManager->persist($skillCategory);
+
+    public function save(Skill $skill){
+        $this->entityManager->persist($skill);
         $this->entityManager->flush();
     }
-
 }
