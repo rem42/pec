@@ -3,11 +3,33 @@
 {% block body %}
 
 	<h1>Liste des compétences</h1>
-	<ul>
-	{% for skill in skills %}
-		<li>{{ skill.skill.name }} - {{ skill.skill.skillCategory }}</li>
-	{% endfor %}
-	</ul>
+
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+			<tr>
+				<th>#</th>
+				<th>name</th>
+				<th>category</th>
+				<th>date_start</th>
+				<th>date_end</th>
+				<th>actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for userSkill in userSkills %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ userSkill.skill.name }}</td>
+					<td>{{ userSkill.skill.skillCategory }}</td>
+					<td>{{ userSkill.dateStart.format('Y-m-d') }}</td>
+					<td>{{ userSkill.dateEnd.format('Y-m-d') }}</td>
+					<td><a href="{{ path('userSkillDelete',{'id': userSkill.id}) }}">[[DELETE]]</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
 	<h2>Ajouter une compétence</h2>
 

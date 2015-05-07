@@ -20,8 +20,13 @@
     <route id="addskillcategory" path="/utilisateur/ajoutercategoriecompetence">
         <default key="_controller">AppBundle:SkillCategory:add</default>
     </route>
-    <route id="skills" path="/utilisateur/mesCompetences">
+
+    <route id="userSkills" path="/utilisateur/mesCompetences">
         <default key="_controller">AppBundle:SkillUser:list</default>
+    </route>
+
+    <route id="userSkillDelete" path="/utilisateur/mesCompetences/supprimer/{id}">
+        <default key="_controller">AppBundle:SkillUser:delete</default>
     </route>
 
     <route id="userCategoryAdd" path="/utilisateur/AjoutUserCategorie">
