@@ -4,11 +4,11 @@ security:
             pattern:    ^/
             anonymous: ~
             form_login:
-                login_path: /connexion
+                login_path: /
                 check_path: /connexion_check
             logout:
                 path:   /deconnexion
-                target: /connexion
+                target: /
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
