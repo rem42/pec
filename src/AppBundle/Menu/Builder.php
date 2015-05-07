@@ -18,6 +18,8 @@ class Builder extends ContainerAware
 
             $menu->addChild('Connexion', array('route' => 'login'))
                 ->setAttribute('icon', 'fa fa-group');
+        }else{
+            $menu->addChild('Mes compétences', array('route' => 'skills'));
         }
 
 
