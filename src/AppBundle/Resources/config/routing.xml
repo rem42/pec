@@ -32,6 +32,10 @@
         <default key="_controller">AppBundle:User:profile</default>
     </route>
 
+    <route id="profil_Public" path="/profil/public/{id}">
+        <default key="_controller">AppBundle:User:profilePublic</default>
+    </route>
+
     <route id="login_check" path="/connexion_check"></route>
     <route id="logout" path="/utilisateur/deconnexion"></route>
 </routes>
