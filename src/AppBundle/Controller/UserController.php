@@ -12,6 +12,10 @@ class UserController extends Controller{
 
     public function registerAction(Request $request){
 
+        if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))) {
+            return $this->redirect('home');
+        }
+
         $user = new User();
 
         $form = $this->createForm(new UserRegisterType(), $user);

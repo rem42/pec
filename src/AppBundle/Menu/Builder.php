@@ -13,11 +13,11 @@ class Builder extends ContainerAware
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
         if(!$this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))){
 
-            $menu->addChild('Inscription', array('route' => 'register'))
-                ->setAttribute('icon', 'fa fa-list');
-
             $menu->addChild('Connexion', array('route' => 'login'))
                 ->setAttribute('icon', 'fa fa-group');
+
+            $menu->addChild('Inscription', array('route' => 'register'))
+                ->setAttribute('icon', 'fa fa-list');
         }else{
             $menu->addChild('Mes compétences', array('route' => 'skills'));
         }
