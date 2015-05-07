@@ -17,21 +17,21 @@
     </route>
 
 
-    <route id="addskillcategory" path="/ajoutercategoriecompetence">
+    <route id="addskillcategory" path="/utilisateur/ajoutercategoriecompetence">
         <default key="_controller">AppBundle:SkillCategory:add</default>
     </route>
-    <route id="skills" path="/mesCompetences">
+    <route id="skills" path="/utilisateur/mesCompetences">
         <default key="_controller">AppBundle:Skill:list</default>
     </route>
 
-    <route id="userCategoryAdd" path="/add">
+    <route id="userCategoryAdd" path="/utilisateur/AjoutUserCategorie">
         <default key="_controller">AppBundle:UserCategory:add</default>
     </route>
 
-    <route id="profil" path="/profil">
+    <route id="profil" path="/utilisateur/monProfil">
         <default key="_controller">AppBundle:User:profile</default>
     </route>
 
     <route id="login_check" path="/connexion_check"></route>
-    <route id="logout" path="/deconnexion"></route>
+    <route id="logout" path="/utilisateur/deconnexion"></route>
 </routes>
