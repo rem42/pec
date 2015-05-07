@@ -2,11 +2,14 @@
 
 {% block body %}
 
-    <h1>TEST</h1>
-    <label>Username</label>
-    <span>{{ app.user.username }}</span>
-    <br/>
-    <label>Email</label>
-    <span>{{ app.user.mail }}</span>
-
+    <h1>Timeline</h1>
+    <script type="text/javascript">
+        var timeline_config = {
+            width: "100%",
+            height: "100%",
+            debug: true,
+            source: '{{ asset('bundles/app/JsonTest/test_extra_html.json') }}'
+        }
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/storyjs-embed.js') }}"></script>
 {% endblock %}
