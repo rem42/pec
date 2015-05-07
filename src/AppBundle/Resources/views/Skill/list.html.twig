@@ -5,8 +5,13 @@
 	<h1>Liste des compétences</h1>
 	<ul>
 	{% for skill in skills %}
-		<li>{{ skill.name }}</li>
+		<li>{{ skill.name }} - {{ skill.skillCategory }}</li>
 	{% endfor %}
 	</ul>
+
+	<h2>Ajouter une compétence</h2>
+
+	{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+	{{ form(form) }}
 
 {% endblock %}
