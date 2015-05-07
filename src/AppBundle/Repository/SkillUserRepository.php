@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\SkillUser;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 
 class SkillUserRepository{
@@ -27,7 +28,7 @@ class SkillUserRepository{
         $this->entityManager->flush();
     }
 
-    public function findById($id){
-        return $this->entityManager->getRepository('AppBundle:SkillUser')->findOneBy(array("id"=>$id));
+    public function findById($id, User $user){
+        return $this->entityManager->getRepository('AppBundle:SkillUser')->findOneBy(array("id"=>$id, "user"=>$user));
     }
 }

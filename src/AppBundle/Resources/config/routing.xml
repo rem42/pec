@@ -29,6 +29,10 @@
         <default key="_controller">AppBundle:SkillUser:delete</default>
     </route>
 
+    <route id="userSkillEdit" path="/utilisateur/mesCompetences/modifier/{id}">
+        <default key="_controller">AppBundle:SkillUser:edit</default>
+    </route>
+
     <route id="userCategoryAdd" path="/utilisateur/AjoutUserCategorie">
         <default key="_controller">AppBundle:UserCategory:add</default>
     </route>

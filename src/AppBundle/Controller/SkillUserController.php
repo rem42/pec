@@ -32,9 +32,34 @@ class SkillUserController extends Controller{
     }
 
     public function deleteAction(Request $request){
-        $userSkills = $this->get('appbundle.repository.skilluser')->findById($request->get("id"));
+        $userSkills = $this->get('appbundle.repository.skilluser')->findById($request->get("id"), $this->getUser());
         $this->get('appbundle.repository.skilluser')->delete($userSkills);
 
         return $this->redirect($this->generateUrl('userSkills'));
+    }
+
+    public function editAction(Request $request){
+        if($request->get("id")!=""){
+            $skillUser = $this->get('appbundle.repository.skilluser')->findById($request->get("id"), $this->getUser());
+            $form = $this->createForm(new SkillUserAddType(), $skillUser);
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+
+                $skillUser = $form->getData();
+                $this->get('appbundle.repository.skilluser')->save($skillUser);
+
+                return $this->redirect($this->generateUrl('userSkills'));
+            }
+
+
+
+            return $this->render('AppBundle:SkillUser:edit.html.twig', array(
+                'form' => $form->createView(),
+            ));
+        }else{
+            return $this->redirect($this->generateUrl('userSkills'));
+        }
+
     }
 }

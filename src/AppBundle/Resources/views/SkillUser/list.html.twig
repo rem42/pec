@@ -24,7 +24,10 @@
 					<td>{{ userSkill.skill.skillCategory }}</td>
 					<td>{{ userSkill.dateStart.format('Y-m-d') }}</td>
 					<td>{{ userSkill.dateEnd.format('Y-m-d') }}</td>
-					<td><a href="{{ path('userSkillDelete',{'id': userSkill.id}) }}">[[DELETE]]</a></td>
+					<td>
+						<a href="{{ path('userSkillDelete',{'id': userSkill.id}) }}">[[DELETE]]</a>
+						<a href="{{ path('userSkillEdit',{'id': userSkill.id}) }}">[[EDIT]]</a>
+					</td>
 				</tr>
 			{% endfor %}
 			</tbody>
