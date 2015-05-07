@@ -41,4 +41,10 @@ class UserController extends Controller{
 
         ));
     }
+
+    public function profilePublicAction($id){
+        return $this->render('AppBundle:User:profilePublic.html.twig', array(
+
+        ));
+    }
 }
