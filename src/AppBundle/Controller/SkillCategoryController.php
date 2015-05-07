@@ -21,7 +21,7 @@ class SkillCategoryController extends Controller{
             $skillcategory = $form->getData();
             $this->get('appbundle.repository.skillcategory')->save($skillcategory);
 
-            return $this->redirect($this->generateUrl('home'));
+            return $this->redirect($this->generateUrl('addskillcategory'));
         }
 
         $skillcategories = $this->get('appbundle.repository.skillcategory')->liste();
