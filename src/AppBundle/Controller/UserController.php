@@ -1,10 +1,12 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Type\ChangePersonalDataType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\UserRegisterType;
+use AppBundle\Form\Type\ChangePasswordType;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 
@@ -36,9 +38,53 @@ class UserController extends Controller{
         ));
     }
 
-    public function profileAction(){
-        return $this->render('AppBundle:User:profil.html.twig', array(
+    public function profileAction(Request $request){
 
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+
+        $formChangePassword = $this->createForm(new ChangePasswordType());
+        $formChangePersonalData = $this->createForm(new ChangePersonalDataType($this->getUser()));
+
+        // Traitement du formulaire pour changer de mot de passe
+        if($request->request->has('changePassword')){
+
+            $formChangePassword->handleRequest($request);
+
+            if ($formChangePassword->isValid()) {
+
+                // On récupère les data du formulaure
+                $password = $request->request->get('changePassword');
+
+                $user->setPassword($password['password']['first']);
+                $em->merge($user);
+                $em->flush();
+            }
+        }
+
+        // Traitement du formulaire pour changer les informations personnelles
+        if($request->request->has('changePersonalData')){
+
+            $formChangePersonalData->handleRequest($request);
+
+            if ($formChangePersonalData->isValid()) {
+
+                // On récupère les data du formulaure
+                $data = $request->request->get('changePersonalData');
+
+                $user->setName($data['name']);
+                $user->setSurname($data['surname']);
+                $user->setUsername($data['username']);
+                $user->setMail($data['mail']);
+                $em->merge($user);
+                $em->flush();
+            }
+        }
+
+        return $this->render('AppBundle:User:profil.html.twig', array(
+            'formChangePassword' => $formChangePassword->createView(),
+            'formChangePersonalData' => $formChangePersonalData->createView(),
         ));
     }
 }

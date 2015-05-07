@@ -2,11 +2,63 @@
 
 {% block body %}
 
-	<h1>Profile</h1>
-	<label>Username</label>
-	<span>{{ app.user.username }}</span>
-	<br/>
-	<label>Email</label>
-	<span>{{ app.user.mail }}</span>
+    <h1>Profile</h1>
+
+    <div role="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#voir" aria-controls="voir" role="tab" data-toggle="tab">Voir</a></li>
+            <li role="presentation"><a href="#modifier" aria-controls="modifier" role="tab" data-toggle="tab">Modifer</a></li>
+            <li role="presentation"><a href="#parametres" aria-controls="parametres" role="tab" data-toggle="tab">Paramètres</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="voir">
+
+                <div class="group">
+                    <label>Prénom</label>
+                    <p>{{ app.user.name }}</p>
+                </div>
+
+                <div class="group">
+                    <label>Nom</label>
+                    <p>{{ app.user.surname }}</p>
+                </div>
+
+                <div class="group">
+                    <label>Username</label>
+                    <p>{{ app.user.username }}</p>
+                </div>
+
+                <div class="group">
+                    <label>Email</label>
+                    <p>{{ app.user.mail }}</p>
+                </div>
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="modifier">
+
+                <h2>Informations</h2>
+
+                {{ form(formChangePersonalData) }}
+
+                <h2>Mot de passe</h2>
+
+                {{ form(formChangePassword) }}
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="parametres">
+
+                <p>A définir</p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 {% endblock %}

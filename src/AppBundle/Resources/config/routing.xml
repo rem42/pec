@@ -29,6 +29,11 @@
         <default key="_controller">AppBundle:User:profile</default>
     </route>
 
+    <route id="profil_update" path="/profil/update">
+        <default key="_controller">AppBundle:User:profile</default>
+        <requirement key="_method">UPDATE</requirement>
+    </route>
+
     <route id="login_check" path="/connexion_check"></route>
     <route id="logout" path="/deconnexion"></route>
 </routes>
