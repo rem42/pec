@@ -14,7 +14,11 @@ class SkillUserRepository{
         $this->entityManager = $entityManager;
     }
 
-    public function liste(User $user){
+    public function findAll(){
+        return $this->entityManager->getRepository('AppBundle:SkillUser')->findAll();
+    }
+
+    public function findByUser(User $user){
         return $this->entityManager->getRepository('AppBundle:SkillUser')->findBy(array('user' => $user));
     }
 
