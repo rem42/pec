@@ -26,6 +26,16 @@ class UserController extends Controller{
         if ($form->isValid()) {
 
             $user = $form->getData();
+
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+            $user->setPassword($password);
+
+            $date = new \DateTime('NOW');
+            $user->setCreatedAt($date);
+            $user->setUpdatedAt($date);
+
             $this->get('appbundle.repository.user')->save($user);
             $token = new UsernamePasswordToken($user, null, 'appbundle.repository.user', $user->getRoles());
             $this->get('security.token_storage')->setToken($token);
