@@ -16,8 +16,8 @@ class SkillUserController extends Controller{
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-            $skillUser = $form->getData();
+            $user = $this->get('appbundle.repository.user')->loadUserByUsername($this->getUser()->getUsername());
+            $skillUser->setUser($user);
             $this->get('appbundle.repository.skilluser')->save($skillUser);
 
             return $this->redirect($this->generateUrl('userSkills'));
