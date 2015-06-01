@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 use AppBundle\Form\Type\ChangePersonalDataType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\User;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\UserRegisterType;
 use AppBundle\Form\Type\ChangePasswordType;
@@ -98,9 +99,17 @@ class UserController extends Controller{
         ));
     }
 
-    public function profilePublicAction($id){
+    public function profilePublicAction($id)
+    {
         return $this->render('AppBundle:User:profilePublic.html.twig', array(
 
         ));
+    }
+
+    public function searchAction(Request $request){
+        $string = $this->getRequest()->request->get('searchText');
+        $users = $this->get("appbundle.repository.user")->findUsers($string);
+
+        return new JsonResponse($users);
     }
 }

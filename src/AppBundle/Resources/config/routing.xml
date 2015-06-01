@@ -44,8 +44,13 @@
         <default key="_controller">AppBundle:User:profile</default>
     </route>
 
-    <route id="profil_Public" path="/profil/public/{id}">
+    <route id="profil_public" path="/profil/public/{id}">
         <default key="_controller">AppBundle:User:profilePublic</default>
+        <option key="expose">true</option>
+    </route>
+
+    <route id="search" path="/recherche">
+        <default key="_controller">AppBundle:User:search</default>
     </route>
 
     <route id="login_check" path="/connexion_check"></route>
