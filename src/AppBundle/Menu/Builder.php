@@ -20,6 +20,7 @@ class Builder extends ContainerAware
                 ->setAttribute('icon', 'fa fa-list');
         }else{
             $menu->addChild('Mes compétences', array('route' => 'userSkills'));
+            $menu->addChild('Compétences', array('route' => 'addskill'));
             $menu->addChild('Catégories de compétences', array('route' => 'addskillcategory'));
         }
 
