@@ -14,8 +14,8 @@ class SkillUserRepository{
         $this->entityManager = $entityManager;
     }
 
-    public function liste(){
-        return $this->entityManager->getRepository('AppBundle:SkillUser')->findAll();
+    public function liste(User $user){
+        return $this->entityManager->getRepository('AppBundle:SkillUser')->findBy(array('user' => $user));
     }
 
     public function save(SkillUser $skillUser){

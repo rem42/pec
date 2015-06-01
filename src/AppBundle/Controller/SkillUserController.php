@@ -23,7 +23,7 @@ class SkillUserController extends Controller{
             return $this->redirect($this->generateUrl('userSkills'));
         }
 
-        $userSkills = $this->get('appbundle.repository.skilluser')->liste();
+        $userSkills = $this->get('appbundle.repository.skilluser')->liste($this->getUser());
 
         return $this->render('AppBundle:SkillUser:list.html.twig', array(
             'userSkills' => $userSkills,
