@@ -33,6 +33,7 @@ class SkillUserController extends Controller{
 
     public function deleteAction(Request $request){
         $userSkills = $this->get('appbundle.repository.skilluser')->findById($request->get("id"), $this->getUser());
+        d($userSkills);
         $this->get('appbundle.repository.skilluser')->delete($userSkills);
 
         return $this->redirect($this->generateUrl('userSkills'));
