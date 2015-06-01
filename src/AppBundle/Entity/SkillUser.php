@@ -114,11 +114,4 @@ class SkillUser {
     {
         $this->userSkillsValidation = $userSkillsValidation;
     }
-
-    public function __tostring(){
-        return $this->getName();
-    }
-
-
-
 }
