@@ -75,6 +75,9 @@ class UserController extends Controller{
 
                 $em->merge($user);
                 $em->flush();
+            }else{
+                //d($formChangePassword->getErrorsAsString());
+                return $this->redirect($this->generateUrl('home')."#modifier");
             }
         }
 

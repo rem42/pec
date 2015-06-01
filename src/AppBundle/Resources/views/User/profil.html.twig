@@ -61,4 +61,27 @@
 
     </div>
 
+	<script type="application/javascript">
+		$(document).ready(function() {
+			/**
+			 * Select tab from url
+			 */
+			var hash = document.location.hash;
+			var prefix = "tab_";
+			if (hash) {
+				$('.nav-tabs a[href=' + hash.replace(prefix, "") + ']').click();
+			}
+
+			// Change hash for page-reload
+			$('.nav-tabs a').on('shown', function (e) {
+				window.location.hash = e.target.hash.replace("#", "#" + prefix);
+			});
+
+			// Update data list when filter item selection change
+			$('.form-filter select').on('change', function () {
+				$('.form-filter').submit();
+			});
+		});
+	</script>
+
 {% endblock %}
