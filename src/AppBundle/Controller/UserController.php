@@ -68,7 +68,11 @@ class UserController extends Controller{
                 // On récupère les data du formulaure
                 $password = $request->request->get('changePassword');
 
-                $user->setPassword($password['password']['first']);
+                $factory = $this->get('security.encoder_factory');
+                $encoder = $factory->getEncoder($user);
+                $password = $encoder->encodePassword($password['password']['first'], $user->getSalt());
+                $user->setPassword($password);
+
                 $em->merge($user);
                 $em->flush();
             }
