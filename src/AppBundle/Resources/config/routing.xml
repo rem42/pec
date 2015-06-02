@@ -35,6 +35,10 @@
         <default key="_controller">AppBundle:UserCategory:add</default>
     </route>
 
+    <route id="userValidation" path="/validation/{id}">
+        <default key="_controller">AppBundle:UserSkillValidation:validate</default>
+    </route>
+
     <route id="profil" path="/utilisateur/profil">
         <default key="_controller">AppBundle:User:profile</default>
     </route>

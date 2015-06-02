@@ -114,11 +114,15 @@ class UserController extends Controller{
 
         $skills = array();
         foreach ($userSkills as $us) {
+            $text = $us["s_name"];
+            if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER')) && $user->getId() != $this->getUser()->getId()){
+                $text .= ' <input type="button" class="validUser btn btn-default" data-url="'.$this->generateUrl('userValidation', array("id"=> $us["su_id"])).'" value="Valider cette compétence" />';
+            }
             $skills[] = [
-                'startDate' => $us["su_dateStart"]->format('d/m/Y h:i:s'),
-                'endDate' => $us["su_dateEnd"]->format('d/m/Y h:i:s'),
+                'startDate' => $us["su_dateStart"]->format('m/d/Y'),
+                'endDate' => $us["su_dateEnd"]->format('m/d/Y'),
                 'headline' => $us["sc_name"],
-                'text' => $us["s_name"].' <a href="" >Valider cette compétence</a>'
+                'text' => $text
             ];
         }
 /*
@@ -136,7 +140,7 @@ class UserController extends Controller{
 
 
         return $this->render('AppBundle:User:profilePublic.html.twig', array(
-            'timeLine' => ($timeLine)
+            'timeLine' => $timeLine
         ));
     }
 

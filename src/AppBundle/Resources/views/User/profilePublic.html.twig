@@ -21,12 +21,32 @@
     <div id="timeline-embed"></div>
 
     <script type="text/javascript">
-        var timeline_config = {
-            width: "100%",
-            height: "550",
-            debug: true,
-            source: {{ timeLine|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
-        }
+	    var timeline_config = {
+		    width: "100%",
+		    height: "550",
+		    debug: true,
+		    source: {{ timeLine|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
+	    };
+	    function ajoutEvent(){
+		    $('.validUser').unbind('click').click(function(){
+			    var input = $(this);
+			    $.ajax({
+				    type: "GET",
+				    url: $(this).data('url'),
+				    dataType: "json",
+				    success : function(response)
+				    {
+					    if(response){
+						    console.log($(this));
+							$(this).html('poney');
+					    }else{
+						    alert('Vous ne pouvez pas valider plusieurs fois');
+					    }
+				    }
+			    });
+			    $(this).html('coucou');
+		    });
+	    }
     </script>
     <script type="text/javascript" src="{{ asset('bundles/app/js/storyjs-embed.js') }}"></script>
 {% endblock %}

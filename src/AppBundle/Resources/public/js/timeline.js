@@ -6189,8 +6189,8 @@ if (typeof VMM.Slider != 'undefined') {
 			} else {
 				VMM.Lib.addClass($slide, c.layout);
 			}
-			
-			
+
+            ajoutEvent();
 		};
 		
 	}
