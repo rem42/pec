@@ -19,6 +19,7 @@ class Builder extends ContainerAware
             $menu->addChild('Inscription', array('route' => 'register'))
                 ->setAttribute('icon', 'fa fa-list');
         }else{
+            $menu->addChild('Ma timeline', array('route' => 'timeline'));
             $menu->addChild('Mes compétences', array('route' => 'userSkills'));
             $menu->addChild('Compétences', array('route' => 'addskill'));
             $menu->addChild('Catégories de compétences', array('route' => 'addskillcategory'));
