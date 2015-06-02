@@ -15,7 +15,6 @@ class Skill {
     protected $skillsUser;
 
     public function __construct() {
-        $this->skillCategory = new ArrayCollection();
         $this->skillsUser = new ArrayCollection();
     }
 
