@@ -111,25 +111,16 @@ class UserController extends Controller{
     {
         $user = $this->get('appbundle.repository.user')->loadUserById($id);
         $userSkills = $this->get('appbundle.repository.skilluser')->findByUserForTimeline($user);
-        //d($userSkills);
-//d($userSkills[0]->getDateStart());
+
         $skills = array();
-        for($i=0;$i<sizeof($userSkills);$i++) {
+        foreach ($userSkills as $us) {
             $skills[] = [
-                'startDate' => $userSkills[$i]->getDateStart()->format('d/m/Y h:i:s'),
-                'endDate' => $userSkills[$i]->getDateEnd()->format('d/m/Y h:i:s'),
-                'headline' => $userSkills[$i]->getSkill()->getSkillCategory()->getName(),
-                'text' => $userSkills[$i]->getSkill()->getName()
+                'startDate' => $us["su_dateStart"]->format('d/m/Y h:i:s'),
+                'endDate' => $us["su_dateEnd"]->format('d/m/Y h:i:s'),
+                'headline' => $us["sc_name"],
+                'text' => $us["s_name"]
             ];
         }
-        /*foreach ($userSkills as $us) {
-            $skills[] = [
-                'startDate' => $us->getDateStart()->format('d/m/Y h:i:s'),
-                'endDate' => $us->getDateEnd()->format('d/m/Y h:i:s'),
-                'headline' => $us->getSkill()->getSkillCategory()->getName(),
-                'text' => $us->getSkill()->getName()
-            ];
-        }*/
 /*
 
                 "text" => htmlentities("<div style='font-size:16px; font-weight:normal; color:#74736c;'>Vos compétences</div><br /><div>"),

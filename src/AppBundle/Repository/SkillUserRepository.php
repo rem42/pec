@@ -30,7 +30,7 @@ class SkillUserRepository{
             LEFT JOIN AppBundle:SkillCategory sc WITH s.skillCategory = sc.id
             WHERE su.user = :user_id
             '
-        )->setParameter(':user_id', $user->getId())->getResult();
+        )->setParameter(':user_id', $user->getId())->getScalarResult();
     }
 
     public function save(SkillUser $skillUser){
