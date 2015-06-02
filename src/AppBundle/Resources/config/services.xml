@@ -27,5 +27,9 @@
             <argument id="doctrine.orm.entity_manager" type="service"/>
         </service>
 
+        <service class="AppBundle\Repository\UserSkillValidationRepository" id="appbundle.repository.userskillvalidation">
+            <argument id="doctrine.orm.entity_manager" type="service"/>
+        </service>
+
     </services>
 </container>

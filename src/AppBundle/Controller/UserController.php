@@ -118,7 +118,7 @@ class UserController extends Controller{
                 'startDate' => $us["su_dateStart"]->format('d/m/Y h:i:s'),
                 'endDate' => $us["su_dateEnd"]->format('d/m/Y h:i:s'),
                 'headline' => $us["sc_name"],
-                'text' => $us["s_name"]
+                'text' => $us["s_name"].' <a href="" >Valider cette compétence</a>'
             ];
         }
 /*
