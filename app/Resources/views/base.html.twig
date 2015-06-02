@@ -45,7 +45,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('login') }}">PEC</a>
+                {% if app.user %}
+                    <a class="navbar-brand" href="{{ path('timeline') }}">PEC</a>
+                {% else %}
+                    <a class="navbar-brand" href="{{ path('login') }}">PEC</a>
+                {% endif %}
+
             </div>
 
             {# Collect the nav links, forms, and other content for toggling #}

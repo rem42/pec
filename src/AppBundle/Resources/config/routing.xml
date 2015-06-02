@@ -39,6 +39,10 @@
         <default key="_controller">AppBundle:User:profile</default>
     </route>
 
+    <route id="timeline" path="/utilisateur/timeline">
+        <default key="_controller">AppBundle:User:timeline</default>
+    </route>
+
     <route id="profil_public" path="/profil/public/{id}">
         <default key="_controller">AppBundle:User:profilePublic</default>
         <option key="expose">true</option>
