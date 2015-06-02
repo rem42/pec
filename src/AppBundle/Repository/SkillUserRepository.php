@@ -22,6 +22,17 @@ class SkillUserRepository{
         return $this->entityManager->getRepository('AppBundle:SkillUser')->findBy(array('user' => $user));
     }
 
+    public function findByUserForTimeline(User $user){
+        return $this->entityManager->createQuery(
+            'SELECT su, s, sc
+            FROM AppBundle:SkillUser su
+            LEFT JOIN AppBundle:Skill s WITH su.skill = s.id
+            LEFT JOIN AppBundle:SkillCategory sc WITH s.skillCategory = sc.id
+            WHERE su.user = :user_id
+            '
+        )->setParameter(':user_id', $user->getId())->getResult();
+    }
+
     public function save(SkillUser $skillUser){
         $this->entityManager->persist($skillUser);
         $this->entityManager->flush();

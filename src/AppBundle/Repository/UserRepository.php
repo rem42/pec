@@ -30,6 +30,19 @@ class UserRepository implements UserProviderInterface{
         return $user;
     }
 
+    public function loadUserById($id){
+        $user = $this->entityManager
+            ->getRepository("AppBundle:User")
+            ->findOneBy(["id" => $id])
+        ;
+
+        if (null === $user) {
+            throw new UsernameNotFoundException(sprintf('User "%s" not found.', $username));
+        }
+
+        return $user;
+    }
+
     public function refreshUser(UserInterface $user)
     {
         $refreshedUser = $this->loadUserByUsername($user->getUsername());
