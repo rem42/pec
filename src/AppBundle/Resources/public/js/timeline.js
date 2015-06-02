@@ -1225,13 +1225,13 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 			full: "mmmm d',' yyyy",
 			time_short: "h:MM:ss TT",
 			time_no_seconds_short: "h:MM TT",
-			time_no_seconds_small_date: "h:MM TT'<br/><small>'mmmm d',' yyyy'</small>'",
+			time_no_seconds_small_date: "h:MM TT'<br/><small>'d mmmm', 'yyyy'</small>'",
 			full_long: "mmm d',' yyyy 'at' hh:MM TT",
 			full_long_small_date: "hh:MM TT'<br/><small>mmm d',' yyyy'</small>'"
 		},
 			
-		month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-		month_abbr: ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."],
+		month: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+		month_abbr: ["Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août.", "Sept.", "Oct.", "Nov.", "Déc."],
 		day: ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 		day_abbr: ["Sun.", "Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."],
 		hour: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -1245,7 +1245,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 			full_short: "mmm d",
 			full: "mmmm d',' yyyy",
 			time_no_seconds_short: "h:MM TT",
-			time_no_seconds_small_date: "dddd', 'h:MM TT'<br/><small>'mmmm d',' yyyy'</small>'",
+			time_no_seconds_small_date: "dddd', 'h:MM TT'<br/><small>'d mmmm', 'yyyy'</small>'",
 			full_long: "dddd',' mmm d',' yyyy 'at' hh:MM TT",
 			full_long_small_date: "hh:MM TT'<br/><small>'dddd',' mmm d',' yyyy'</small>'"
 		},
@@ -1771,8 +1771,8 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 			"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 		],
 		monthNames: [
-			"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-			"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+            "Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août.", "Sept.", "Oct.", "Nov.", "Déc.",
+            "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
 		]
 	};
 
@@ -2724,8 +2724,8 @@ if(typeof VMM != 'undefined' && typeof VMM.Language == 'undefined') {
 			wikipedia: "en"
 		},
 		date: {
-			month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			month_abbr: ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."],
+			month: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+			month_abbr: ["Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août.", "Sept.", "Oct.", "Nov.", "Déc."],
 			day: ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 			day_abbr: ["Sun.","Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."]
 		}, 
@@ -2737,7 +2737,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Language == 'undefined') {
 			full: "mmmm d',' yyyy",
 			time_short: "h:MM:ss TT",
 			time_no_seconds_short: "h:MM TT",
-			time_no_seconds_small_date: "h:MM TT'<br/><small>'mmmm d',' yyyy'</small>'",
+			time_no_seconds_small_date: "h:MM TT'<br/><small>'d mmmm', 'yyyy'</small>'",
 			full_long: "mmm d',' yyyy 'at' h:MM TT",
 			full_long_small_date: "h:MM TT'<br/><small>mmm d',' yyyy'</small>'"
 		},
