@@ -1225,18 +1225,18 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 			full: "mmmm d',' yyyy",
 			time_short: "h:MM:ss TT",
 			time_no_seconds_short: "h:MM TT",
-			time_no_seconds_small_date: "h:MM TT'<br/><small>'d mmmm', 'yyyy'</small>'",
+			time_no_seconds_small_date: "h:MM TT'<br/><small>'mmmm d',' yyyy'</small>'",
 			full_long: "mmm d',' yyyy 'at' hh:MM TT",
 			full_long_small_date: "hh:MM TT'<br/><small>mmm d',' yyyy'</small>'"
 		},
-			
-		month: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-		month_abbr: ["Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août.", "Sept.", "Oct.", "Nov.", "Déc."],
+
+		month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+		month_abbr: ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."],
 		day: ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 		day_abbr: ["Sun.", "Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."],
 		hour: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 		hour_suffix: ["am"],
-			
+
 		//B.C.
 		bc_format: {
 			year: "yyyy",
@@ -1245,14 +1245,14 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 			full_short: "mmm d",
 			full: "mmmm d',' yyyy",
 			time_no_seconds_short: "h:MM TT",
-			time_no_seconds_small_date: "dddd', 'h:MM TT'<br/><small>'d mmmm', 'yyyy'</small>'",
+			time_no_seconds_small_date: "dddd', 'h:MM TT'<br/><small>'mmmm d',' yyyy'</small>'",
 			full_long: "dddd',' mmm d',' yyyy 'at' hh:MM TT",
 			full_long_small_date: "hh:MM TT'<br/><small>'dddd',' mmm d',' yyyy'</small>'"
 		},
-			
+
 		setLanguage: function(lang) {
 			trace("SET DATE LANGUAGE");
-			VMM.Date.dateformats		=	lang.dateformats;	
+			VMM.Date.dateformats		=	lang.dateformats;
 			VMM.Date.month				=	lang.date.month;
 			VMM.Date.month_abbr			=	lang.date.month_abbr;
 			VMM.Date.day				=	lang.date.day;
@@ -1260,7 +1260,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 			dateFormat.i18n.dayNames	=	lang.date.day_abbr.concat(lang.date.day);
 			dateFormat.i18n.monthNames	=	lang.date.month_abbr.concat(lang.date.month);
 		},
-			
+
 		parse: function(d, precision) {
 			"use strict";
 			var date,
@@ -1276,19 +1276,19 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 					second: 		false,
 					millisecond: 	false
 				};
-				
+
 			if (type.of(d) == "date") {
 				trace("DEBUG THIS, ITs A DATE");
 				date = d;
 			} else {
-				date = new Date(0); 
+				date = new Date(0);
 				date.setMonth(0); date.setDate(1); date.setHours(0); date.setMinutes(0); date.setSeconds(0); date.setMilliseconds(0);
 				if ( d.match(/,/gi) ) {
 					date_array = d.split(",");
 					for(var i = 0; i < date_array.length; i++) {
 						date_array[i] = parseInt(date_array[i], 10);
 					}
-					if (date_array[0]) {	
+					if (date_array[0]) {
 						date.setFullYear(date_array[0]);
 						p.year = true;
 					}
@@ -1322,7 +1322,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 					}
 				} else if (d.match("/")) {
 					if (d.match(" ")) {
-						
+
 						time_parse = d.split(" ");
 						if (d.match(":")) {
 							time_array = time_parse[1].split(":");
@@ -1354,7 +1354,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 					if (date_array[0] >= 0) {
 						var month = date_array[0] - 1;
 						date.setMonth(month);
-						// if (date.getMonth() != month) { 
+						// if (date.getMonth() != month) {
 						// 	date.setMonth(month); // WTF javascript?
 						// }
 						p.month = true;
@@ -1369,17 +1369,17 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 						}
 					}
 				} else if (d.match("now")) {
-					var now = new Date();	
-									
+					var now = new Date();
+
 					date.setFullYear(now.getFullYear());
 					p.year = true;
-					
+
 					date.setMonth(now.getMonth());
 					p.month = true;
-					
+
 					date.setDate(now.getDate());
 					p.day = true;
-					
+
 					if (d.match("hours")) {
 						date.setHours(now.getHours());
 						p.hour = true;
@@ -1457,7 +1457,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 							date.setDate(date_array[2]);
 							p.day = true;
 						}
-						
+
 					} else {
 						date = new Date(Date.parse(d));
 						p.year = true;
@@ -1474,10 +1474,10 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 					}
 				} else {
 					date = new Date(
-						parseInt(d.slice(0,4), 10), 
-						parseInt(d.slice(4,6), 10) - 1, 
-						parseInt(d.slice(6,8), 10), 
-						parseInt(d.slice(8,10), 10), 
+						parseInt(d.slice(0,4), 10),
+						parseInt(d.slice(4,6), 10) - 1,
+						parseInt(d.slice(6,8), 10),
+						parseInt(d.slice(8,10), 10),
 						parseInt(d.slice(10,12), 10)
 					);
 					p.year = true;
@@ -1491,11 +1491,11 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 					if (date.getMilliseconds() >= 1) {
 						p.millisecond = true;
 					}
-					
+
 				}
-				
+
 			}
-			
+
 			if (precision != null && precision != "") {
 				return {
 					date: 		date,
@@ -1505,9 +1505,9 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 				return date;
 			}
 		},
-		
-		
-			
+
+
+
 		prettyDate: function(d, is_abbr, p, d2) {
 			var _date,
 				_date2,
@@ -1517,27 +1517,27 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 				bc_original,
 				bc_number,
 				bc_string;
-				
+
 			if (d2 != null && d2 != "" && typeof d2 != 'undefined') {
 				is_pair = true;
 				trace("D2 " + d2);
 			}
-			
-			
+
+
 			if (type.of(d) == "date") {
-				
+
 				if (type.of(p) == "object") {
 					if (p.millisecond || p.second && d.getSeconds() >= 1) {
 						// YEAR MONTH DAY HOUR MINUTE
 						if (is_abbr){
-							format = VMM.Date.dateformats.time_short; 
+							format = VMM.Date.dateformats.time_short;
 						} else {
 							format = VMM.Date.dateformats.time_short;
 						}
 					} else if (p.minute) {
 						// YEAR MONTH DAY HOUR MINUTE
 						if (is_abbr){
-							format = VMM.Date.dateformats.time_no_seconds_short; 
+							format = VMM.Date.dateformats.time_no_seconds_short;
 						} else {
 							format = VMM.Date.dateformats.time_no_seconds_small_date;
 						}
@@ -1567,9 +1567,9 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 					} else {
 						format = VMM.Date.dateformats.year;
 					}
-					
+
 				} else {
-					
+
 					if (d.getMonth() === 0 && d.getDate() == 1 && d.getHours() === 0 && d.getMinutes() === 0 ) {
 						// YEAR ONLY
 						format = VMM.Date.dateformats.year;
@@ -1597,17 +1597,17 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 					} else {
 						// YEAR MONTH DAY HOUR MINUTE
 						if (is_abbr){
-							format = VMM.Date.dateformats.time_no_seconds_short; 
+							format = VMM.Date.dateformats.time_no_seconds_short;
 						} else {
-							format = VMM.Date.dateformats.full_long; 
+							format = VMM.Date.dateformats.full_long;
 						}
 					}
 				}
-				
+
 				_date = dateFormat(d, format, false);
 				//_date = "Jan"
 				bc_check = _date.split(" ");
-					
+
 				// BC TIME SUPPORT
 				for(var i = 0; i < bc_check.length; i++) {
 					if ( parseInt(bc_check[i], 10) < 0 ) {
@@ -1618,8 +1618,8 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 						_date		= _date.replace(bc_original, bc_string);
 					}
 				}
-					
-					
+
+
 				if (is_pair) {
 					_date2 = dateFormat(d2, format, false);
 					bc_check = _date2.split(" ");
@@ -1633,22 +1633,22 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 							_date2			= _date2.replace(bc_original, bc_string);
 						}
 					}
-						
+
 				}
 			} else {
 				trace("NOT A VALID DATE?");
 				trace(d);
 			}
-				
+
 			if (is_pair) {
 				return _date + " &mdash; " + _date2;
 			} else {
 				return _date;
 			}
 		}
-		
+
 	}).init();
-	
+
 	/*
 	 * Date Format 1.2.3
 	 * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
@@ -1690,7 +1690,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 			if (isNaN(date)) {
 				trace("invalid date " + date);
 				//return "";
-			} 
+			}
 
 			mask = String(dF.masks[mask] || mask || dF.masks["default"]);
 
@@ -1771,8 +1771,8 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 			"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 		],
 		monthNames: [
-            "Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août.", "Sept.", "Oct.", "Nov.", "Déc.",
-            "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+			"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+			"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 		]
 	};
 
@@ -1780,7 +1780,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 	Date.prototype.format = function (mask, utc) {
 		return dateFormat(this, mask, utc);
 	};
-	
+
 }
 
 /* **********************************************
@@ -1790,13 +1790,13 @@ if(typeof VMM != 'undefined' && typeof VMM.Date == 'undefined') {
 /*	* Utilities and Useful Functions
 ================================================== */
 if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
-	
+
 	VMM.Util = ({
-		
+
 		init: function() {
 			return this;
 		},
-		
+
 		removeRange: function(array, from, to) { // rather than change Array.prototype; Thanks Jeff McWhirter for nudge
   			var rest = array.slice((to || from) + 1 || array.length);
   			array.length = from < 0 ? array.length + from : from;
@@ -1809,17 +1809,17 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			var loc = (window.parent.location.protocol).toString(),
 				prefix = "",
 				the_url = url.split("://", 2);
-			
+
 			if (loc.match("http")) {
 				prefix = loc;
 			} else {
 				prefix = "https";
 			}
-			
+
 			return prefix + "://" + the_url[1];
-			
+
 		},
-		
+
 		/*	* MERGE CONFIG
 		================================================== */
 		mergeConfig: function(config_main, config_to_merge) {
@@ -1831,7 +1831,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			}
 			return config_main;
 		},
-		
+
 		/*	* GET OBJECT ATTRIBUTE BY INDEX
 		================================================== */
 		getObjectAttributeByIndex: function(obj, index) {
@@ -1847,22 +1847,22 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			} else {
 				return "";
 			}
-			
+
 		},
-		
+
 		/*	* ORDINAL
 		================================================== */
 		ordinal: function(n) {
-		    return ["th","st","nd","rd"][(!( ((n%10) >3) || (Math.floor(n%100/10)==1)) ) * (n%10)]; 
+		    return ["th","st","nd","rd"][(!( ((n%10) >3) || (Math.floor(n%100/10)==1)) ) * (n%10)];
 		},
-		
+
 		/*	* RANDOM BETWEEN
 		================================================== */
 		//VMM.Util.randomBetween(1, 3)
 		randomBetween: function(min, max) {
 			return Math.floor(Math.random() * (max - min + 1) + min);
 		},
-		
+
 		/*	* AVERAGE
 			* http://jsfromhell.com/array/average
 			* var x = VMM.Util.average([2, 3, 4]);
@@ -1874,7 +1874,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 		    for(m = r.mean = s / t, l = t, s = 0; l--; s += Math.pow(a[l] - m, 2));
 		    return r.deviation = Math.sqrt(r.variance = s / t), r;
 		},
-		
+
 		/*	* CUSTOM SORT
 		================================================== */
 		customSort: function(a, b) {
@@ -1882,7 +1882,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			if(a1== b1) return 0;
 			return a1> b1? 1: -1;
 		},
-		
+
 		/*	* Remove Duplicates from Array
 		================================================== */
 		deDupeArray: function(arr) {
@@ -1899,7 +1899,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			}
 			return out;
 		},
-		
+
 		/*	* Returns a word count number
 		================================================== */
 		wordCount: function(s) {
@@ -1915,7 +1915,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			}
 			return word_count;
 		},
-		
+
 		ratio: {
 			fit: function(w, h, ratio_w, ratio_h) {
 				//VMM.Util.ratio.fit(w, h, ratio_w, ratio_h).width;
@@ -1928,14 +1928,14 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 					_fit.height = h;
 					//_fit.width = Math.round((w / ratio_w) * ratio_h);
 					_fit.width = Math.round((h / ratio_h) * ratio_w);
-					
+
 					if (_fit.width > w) {
 						trace("FIT: DIDN'T FIT!!! ")
 					}
 				}
-				
+
 				return _fit;
-				
+
 			},
 			r16_9: function(w,h) {
 				//VMM.Util.ratio.r16_9(w, h) // Returns corresponding number
@@ -1953,48 +1953,48 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 				}
 			}
 		},
-		
+
 		doubledigit: function(n) {
 			return (n < 10 ? '0' : '') + n;
 		},
-		
+
 		/*	* Returns a truncated segement of a long string of between min and max words. If possible, ends on a period (otherwise goes to max).
 		================================================== */
 		truncateWords: function(s, min, max) {
-			
+
 			if (!min) min = 30;
 			if (!max) max = min;
-			
+
 			var initial_whitespace_rExp = /^[^A-Za-z0-9\'\-]+/gi;
 			var left_trimmedStr = s.replace(initial_whitespace_rExp, "");
 			var words = left_trimmedStr.split(" ");
-			
+
 			var result = [];
-			
+
 			min = Math.min(words.length, min);
 			max = Math.min(words.length, max);
-			
+
 			for (var i = 0; i<min; i++) {
 				result.push(words[i]);
-			}		
-			
+			}
+
 			for (var j = min; i<max; i++) {
 				var word = words[i];
-				
+
 				result.push(word);
-				
+
 				if (word.charAt(word.length-1) == '.') {
 					break;
 				}
-			}		
-			
+			}
+
 			return (result.join(' '));
 		},
-		
+
 		/*	* Turns plain text links into real links
 		================================================== */
 		linkify: function(text,targets,is_touch) {
-			
+
 			// http://, https://, ftp://
 			var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
 
@@ -2003,21 +2003,21 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 
 			// Email addresses
 			var emailAddressPattern = /(([a-zA-Z0-9_\-\.]+)@[a-zA-Z_]+?(?:\.[a-zA-Z]{2,6}))+/gim;
-			
+
 
 			return text
 				.replace(urlPattern, "<a target='_blank' href='$&' onclick='void(0)'>$&</a>")
 				.replace(pseudoUrlPattern, "$1<a target='_blank' onclick='void(0)' href='http://$2'>$2</a>")
 				.replace(emailAddressPattern, "<a target='_blank' onclick='void(0)' href='mailto:$1'>$1</a>");
 		},
-		
+
 		linkify_with_twitter: function(text,targets,is_touch) {
-			
+
 			// http://, https://, ftp://
 			var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
 			var url_pattern = /(\()((?:ht|f)tps?:\/\/[a-z0-9\-._~!$&'()*+,;=:\/?#[\]@%]+)(\))|(\[)((?:ht|f)tps?:\/\/[a-z0-9\-._~!$&'()*+,;=:\/?#[\]@%]+)(\])|(\{)((?:ht|f)tps?:\/\/[a-z0-9\-._~!$&'()*+,;=:\/?#[\]@%]+)(\})|(<|&(?:lt|#60|#x3c);)((?:ht|f)tps?:\/\/[a-z0-9\-._~!$&'()*+,;=:\/?#[\]@%]+)(>|&(?:gt|#62|#x3e);)|((?:^|[^=\s'"\]])\s*['"]?|[^=\s]\s+)(\b(?:ht|f)tps?:\/\/[a-z0-9\-._~!$'()*+,;=:\/?#[\]@%]+(?:(?!&(?:gt|#0*62|#x0*3e);|&(?:amp|apos|quot|#0*3[49]|#x0*2[27]);[.!&',:?;]?(?:[^a-z0-9\-._~!$&'()*+,;=:\/?#[\]@%]|$))&[a-z0-9\-._~!$'()*+,;=:\/?#[\]@%]*)*[a-z0-9\-_~$()*+=\/#[\]@%])/img;
 			var url_replace = '$1$4$7$10$13<a href="$2$5$8$11$14" target="_blank" class="hyphenate">$2$5$8$11$14</a>$3$6$9$12';
-			
+
 			// www. sans http:// or https://
 			var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
 			function replaceURLWithHTMLLinks(text) {
@@ -2026,7 +2026,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			}
 			// Email addresses
 			var emailAddressPattern = /([a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)/gim;
-			
+
 			//var twitterHandlePattern = /(@([\w]+))/g;
 			var twitterHandlePattern = /\B@([\w-]+)/gm;
 			var twitterSearchPattern = /(#([\w]+))/g;
@@ -2037,13 +2037,13 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 				.replace(pseudoUrlPattern, "$1<a target='_blank' class='hyphenate' onclick='void(0)' href='http://$2'>$2</a>")
 				.replace(emailAddressPattern, "<a target='_blank' onclick='void(0)' href='mailto:$1'>$1</a>")
 				.replace(twitterHandlePattern, "<a href='http://twitter.com/$1' target='_blank' onclick='void(0)'>@$1</a>");
-				
+
 				// TURN THIS BACK ON TO AUTOMAGICALLY LINK HASHTAGS TO TWITTER SEARCH
 				//.replace(twitterSearchPattern, "<a href='http://twitter.com/search?q=%23$2' target='_blank' 'void(0)'>$1</a>");
 		},
-		
+
 		linkify_wikipedia: function(text) {
-			
+
 			var urlPattern = /<i[^>]*>(.*?)<\/i>/gim;
 			return text
 				.replace(urlPattern, "<a target='_blank' href='http://en.wikipedia.org/wiki/$&' onclick='void(0)'>$&</a>")
@@ -2052,7 +2052,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 				.replace(/<b\b[^>]*>/gim, "")
 				.replace(/<\/b>/gim, "");
 		},
-		
+
 		/*	* Turns plain text links into real links
 		================================================== */
 		// VMM.Util.unlinkify();
@@ -2062,7 +2062,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			text = text.replace(/<\/a>/i, "");
 			return text;
 		},
-		
+
 		untagify: function(text) {
 			if (!text) {
 				return text;
@@ -2070,18 +2070,18 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 			text = text.replace(/<\/?\s*\w.*?>/g,"");
 			return text;
 		},
-		
+
 		/*	* TK
 		================================================== */
 		nl2br: function(text) {
 			return text.replace(/(\r\n|[\r\n]|\\n|\\r)/g,"<br/>");
 		},
-		
+
 		/*	* Generate a Unique ID
 		================================================== */
 		// VMM.Util.unique_ID(size);
 		unique_ID: function(size) {
-			
+
 			var getRandomNumber = function(range) {
 				return Math.floor(Math.random() * range);
 			};
@@ -2098,7 +2098,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 				}
 				return str;
 			};
-			
+
 			return randomID(size);
 		},
 		/*	* Tells you if a number is even or not
@@ -2111,17 +2111,17 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 		================================================== */
 		//	var somestring = VMM.Util.getUrlVars(str_url)["varname"];
 		getUrlVars: function(string) {
-			
+
 			var str = string.toString();
-			
-			if (str.match('&#038;')) { 
+
+			if (str.match('&#038;')) {
 				str = str.replace("&#038;", "&");
 			} else if (str.match('&#38;')) {
 				str = str.replace("&#38;", "&");
 			} else if (str.match('&amp;')) {
 				str = str.replace("&amp;", "&");
 			}
-			
+
 			var vars = [], hash;
 			var hashes = str.slice(str.indexOf('?') + 1).split('&');
 			for(var i = 0; i < hashes.length; i++) {
@@ -2129,37 +2129,37 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 				vars.push(hash[0]);
 				vars[hash[0]] = hash[1];
 			}
-			
-			
+
+
 			return vars;
 		},
 
 		/*	* Cleans up strings to become real HTML
 		================================================== */
 		toHTML: function(text) {
-			
+
 			text = this.nl2br(text);
 			text = this.linkify(text);
-			
+
 			return text.replace(/\s\s/g,"&nbsp;&nbsp;");
 		},
-		
+
 		/*	* Returns text strings as CamelCase
 		================================================== */
 		toCamelCase: function(s,forceLowerCase) {
-			
+
 			if(forceLowerCase !== false) forceLowerCase = true;
-			
+
 			var sps = ((forceLowerCase) ? s.toLowerCase() : s).split(" ");
-			
+
 			for(var i=0; i<sps.length; i++) {
-				
+
 				sps[i] = sps[i].substr(0,1).toUpperCase() + sps[i].substr(1);
 			}
-			
+
 			return sps.join(" ");
 		},
-		
+
 		/*	* Replaces dumb quote marks with smart ones
 		================================================== */
 		properQuotes: function(str) {
@@ -2237,24 +2237,24 @@ if(typeof VMM != 'undefined' && typeof VMM.Util == 'undefined') {
 						if (split[1]) {
 							split[1] = split[1].toUpperCase();
 						}
-					
+
 						return split.join('');
-					
-					
+
+
 					}
 				};
 
 				__TitleCase.init();
-			
+
 				t = t.replace(/_/g," ");
 				t = __TitleCase.toTitleCase(t);
-			
+
 				return t;
-				
+
 			}
-			
+
 		}
-		
+
 	}).init();
 }
 
@@ -2672,29 +2672,29 @@ LazyLoad = (function (doc) {
 
 LoadLib = (function (doc) {
 	var loaded	= [];
-	
+
 	function isLoaded(url) {
-		
+
 		var i			= 0,
 			has_loaded	= false;
-		
+
 		for (i = 0; i < loaded.length; i++) {
 			if (loaded[i] == url) {
 				has_loaded = true;
 			}
 		}
-		
+
 		if (has_loaded) {
 			return true;
 		} else {
 			loaded.push(url);
 			return false;
 		}
-		
+
 	}
-	
+
 	return {
-		
+
 		css: function (urls, callback, obj, context) {
 			if (!isLoaded(urls)) {
 				LazyLoad.css(urls, callback, obj, context);
@@ -2707,7 +2707,7 @@ LoadLib = (function (doc) {
 			}
 		}
     };
-	
+
 })(this.document);
 
 
@@ -2715,7 +2715,7 @@ LoadLib = (function (doc) {
      Begin VMM.Language.js
 ********************************************** */
 
-/* DEFAULT LANGUAGE 
+/* DEFAULT LANGUAGE
 ================================================== */
 if(typeof VMM != 'undefined' && typeof VMM.Language == 'undefined') {
 	VMM.Language = {
@@ -2724,11 +2724,11 @@ if(typeof VMM != 'undefined' && typeof VMM.Language == 'undefined') {
 			wikipedia: "en"
 		},
 		date: {
-			month: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-			month_abbr: ["Janv.", "Févr.", "Mars", "Avr.", "Mai", "Juin", "Juil.", "Août.", "Sept.", "Oct.", "Nov.", "Déc."],
+			month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+			month_abbr: ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."],
 			day: ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 			day_abbr: ["Sun.","Mon.", "Tues.", "Wed.", "Thurs.", "Fri.", "Sat."]
-		}, 
+		},
 		dateformats: {
 			year: "yyyy",
 			month_short: "mmm",
@@ -2737,7 +2737,7 @@ if(typeof VMM != 'undefined' && typeof VMM.Language == 'undefined') {
 			full: "mmmm d',' yyyy",
 			time_short: "h:MM:ss TT",
 			time_no_seconds_short: "h:MM TT",
-			time_no_seconds_small_date: "h:MM TT'<br/><small>'d mmmm', 'yyyy'</small>'",
+			time_no_seconds_small_date: "h:MM TT'<br/><small>'mmmm d',' yyyy'</small>'",
 			full_long: "mmm d',' yyyy 'at' h:MM TT",
 			full_long_small_date: "h:MM TT'<br/><small>mmm d',' yyyy'</small>'"
 		},
