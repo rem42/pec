@@ -6,6 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title>{% block title %}Welcome!{% endblock %}</title>
+    <style>
+        #searchResults
+        {
+            display: none;
+            position: absolute;
+            background-color: #FFFFFF;
+            border: solid 1px #9a9a9a;
+            border-radius: 5px;
+            padding: 10px 15px 5px 15px;
+        }
+    </style>
 	<!-- Bootstrap core CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -34,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('home') }}">PEC</a>
+                <a class="navbar-brand" href="{{ path('login') }}">PEC</a>
             </div>
 
             {# Collect the nav links, forms, and other content for toggling #}
@@ -43,14 +54,15 @@
                 {{ knp_menu_render('AppBundle:Builder:userMenu', {'currentClass': 'active', 'template': 'AppBundle:Menu:knp_menu.html.twig'}) }}
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" id="search">
+                        <input type="text" class="form-control" placeholder="Search" id="search" autocomplete="off">
                     </div>
+                        <div id="searchResults">
+                        </div>
                 </form>
-                <div id="searchResults">
-                </div>
             </div>
         </div>
     </div>
+
 
     <div class="content" style="margin-top: 60px;">
         {% block body %}{% endblock %}
@@ -75,11 +87,11 @@
                 {
                     var text = "";
                     $(response).each(function(i) {
-                       text += ("<p><a href=" + Routing.generate('profil_public', { id: response[i].id }) + ">"+response[i].name+" "+response[i].surname+"<small> ("+response[i].mail+")</small>"+"</a></p>");
+                       text += ("<p><a href=" + Routing.generate('profil_public', { id: response[i].id }) + ">" + response[i].name + " " + response[i].surname + "<small> (" + response[i].mail + ")</small>" + "</a></p>");
                     });
 
-                    $("#searchResults").html(text);
-                    console.log(response);
+                    $("#searchResults").html(text).show();
+                    //console.log(response);
 
                 }
             });
@@ -87,7 +99,7 @@
         else
         {
             var text = "";
-            $("#searchResults").html(text);
+            $("#searchResults").html(text).hide();
         }
     });
 </script>

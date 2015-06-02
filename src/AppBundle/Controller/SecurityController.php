@@ -11,7 +11,7 @@ class SecurityController extends Controller {
     public function loginAction(Request $request)
     {
         if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))) {
-            return $this->redirect('home');
+            return $this->redirect($this->generateUrl('userSkills'));
         }
 
         //$form = $this->createForm(new UserLoginType());
