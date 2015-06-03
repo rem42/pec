@@ -31,7 +31,7 @@ class SkillCategoryController extends Controller{
     }
 
     public function deleteAction(Request $request){
-        $skillCategory = $this->get('appbundle.repository.skillcategory')->findById($request->get("id"), $this->getUser());
+        $skillCategory = $this->get('appbundle.repository.skillcategory')->findById($request->get("id"));
         $this->get('appbundle.repository.skillcategory')->delete($skillCategory);
 
         return $this->redirect($this->generateUrl('addskillcategory'));

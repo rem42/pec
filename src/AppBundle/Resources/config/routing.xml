@@ -62,8 +62,14 @@
     <route id="editskillcategory" path="/admin/competence/categorie/modifier/{id}">
         <default key="_controller">AppBundle:SkillCategory:edit</default>
     </route>
-    <route id="addskill" path="/admin/ajoutercompetence">
-        <default key="_controller">AppBundle:Skill:add</default>
+    <route id="addskill" path="/admin/competence">
+        <default key="_controller">AppBundle:Skill:list</default>
+    </route>
+    <route id="deleteskill" path="/admin/competence/supprimer/{id}">
+        <default key="_controller">AppBundle:Skill:delete</default>
+    </route>
+    <route id="editskill" path="/admin/competence/modifier/{id}">
+        <default key="_controller">AppBundle:Skill:edit</default>
     </route>
 
     <route id="login_check" path="/connexion_check"></route>
