@@ -21,6 +21,9 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 	<link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+	<link rel="stylesheet" href="{{ asset('bundles/app/css/material/material.css') }}">
+	<link rel="stylesheet" href="{{ asset('bundles/app/css/material/ripples.css') }}">
+	<link rel="stylesheet" href="{{ asset('bundles/app/css/material/roboto.css') }}">
 	<style>
 		.row{
 			margin-right: 0px;
@@ -84,6 +87,8 @@
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 <script src="//cdn.datatables.net/plug-ins/1.10.7/i18n/French.json"></script>
+<script src="{{ asset('bundles/app/js/material/material.js') }}"></script>
+<script src="{{ asset('bundles/app/js/material/ripples.js') }}"></script>
 
 <script>
     $('#search').keyup(function() {
@@ -115,6 +120,8 @@
             $("#searchResults").html(text).hide();
         }
     });
+
+    $.material.init();
 </script>
 {% block javascripts %}{% endblock %}
 </body>
