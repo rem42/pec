@@ -40,7 +40,9 @@ class SkillUserRepository{
 
     public function findByUserForTimeline(User $user){
         return $this->entityManager->createQuery(
-            'SELECT su, s, sc
+            'SELECT su, s, sc, (
+                SELECT COUNT(usv) FROM AppBundle:UserSkillValidation usv WHERE usv.userSkill = su.id
+            ) as vote
             FROM AppBundle:SkillUser su
             LEFT JOIN AppBundle:Skill s WITH su.skill = s.id
             LEFT JOIN AppBundle:SkillCategory sc WITH s.skillCategory = sc.id
