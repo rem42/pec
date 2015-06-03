@@ -28,11 +28,11 @@
 					<thead>
 					<tr>
 						<th>#</th>
-						<th>name</th>
-						<th>category</th>
-						<th>date_start</th>
-						<th>date_end</th>
-						<th>actions</th>
+						<th>Compétence</th>
+						<th>Categorie</th>
+						<th>Date de début</th>
+						<th>Date de fin</th>
+						<th>Actions</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -61,7 +61,13 @@
 
 	<script type="application/javascript">
 		$(document).ready(function() {
-			$('#competence_list').dataTable();
+			$('#competence_list').dataTable(
+				{
+					"language": {
+		                "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/French.json"
+		            }
+	            }
+			);
 			$('#btn_add_skill').click(function(){
 				$('#add_skill').show(500);
 			});
