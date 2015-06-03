@@ -9,7 +9,10 @@ class UserRegisterType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text')
+        $builder
+            ->add('name', 'text',array(
+                'attr' => array('class'=>'form-control')
+            ))
             ->add('surname', 'text')
             ->add('username', 'text')
             ->add('mail', 'email')
@@ -20,7 +23,10 @@ class UserRegisterType extends AbstractType{
                 'first_options'  => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Mot de passe (validation)'),
             ))
-            ->add('send', 'submit');
+
+            ->add('send', 'submit',array(
+        'attr' => array('class'=>' btn btn-success btn-lg btn-block form')
+    ));
     }
     public function getName()
     {
