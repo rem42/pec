@@ -12,13 +12,6 @@
         <default key="_controller">AppBundle:Security:login</default>
     </route>
 
-    <route id="addskillcategory" path="/utilisateur/ajoutercategoriecompetence">
-        <default key="_controller">AppBundle:SkillCategory:add</default>
-    </route>
-    <route id="addskill" path="/utilisateur/ajoutercompetence">
-        <default key="_controller">AppBundle:Skill:add</default>
-    </route>
-
     <route id="userSkills" path="/utilisateur/competences">
         <default key="_controller">AppBundle:SkillUser:list</default>
     </route>
@@ -58,6 +51,13 @@
 
     <route id="admin_index" path="/admin">
         <default key="_controller">AppBundle:Admin:index</default>
+    </route>
+
+    <route id="addskillcategory" path="/admin/ajoutercategoriecompetence">
+        <default key="_controller">AppBundle:SkillCategory:add</default>
+    </route>
+    <route id="addskill" path="/admin/ajoutercompetence">
+        <default key="_controller">AppBundle:Skill:add</default>
     </route>
 
     <route id="login_check" path="/connexion_check"></route>
