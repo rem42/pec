@@ -22,6 +22,8 @@
         <field name="mail" column="mail" type="string" length="100" />
         <field name="salt" column="salt" type="string" length="100" nullable="true" />
         <field name="roles" column="roles" type="array" />
+        <field name="token" column="token" type="string" nullable="true" />
+        <field name="isActivated" column="is_activated" type="boolean" />
         <field name="createdAt" column="created_at" type="datetime" nullable="true" />
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
 
@@ -32,7 +34,6 @@
         <many-to-one field="userCategory" target-entity="UserCategory" inversed-by="users" >
             <join-column name="user_category_id" />
         </many-to-one>
-
 
     </entity>
 </doctrine-mapping>

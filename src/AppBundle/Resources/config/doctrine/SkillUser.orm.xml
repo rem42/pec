@@ -14,7 +14,7 @@
 
         <one-to-many field="userSkillsValidation" target-entity="UserSkillValidation" mapped-by="userSkill">
             <cascade>
-                <cascade-persist/>
+                <cascade-all/>
             </cascade>
         </one-to-many>
 

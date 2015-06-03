@@ -17,6 +17,17 @@ class SkillRepository{
         return $this->entityManager->getRepository('AppBundle:Skill')->findAll();
     }
 
+    public function findById($id){
+        return $this->entityManager
+            ->getRepository("AppBundle:Skill")
+            ->findOneBy(["id" => $id])
+            ;
+    }
+
+    public function delete(Skill $skill){
+        $this->entityManager->remove($skill);
+        $this->entityManager->flush();
+    }
 
     public function save(Skill $skill){
         $this->entityManager->persist($skill);

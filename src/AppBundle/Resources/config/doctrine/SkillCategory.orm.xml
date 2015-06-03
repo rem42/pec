@@ -12,7 +12,7 @@
 
         <one-to-many field="skills" target-entity="Skill" mapped-by="skillCategory">
             <cascade>
-                <cascade-persist/>
+                <cascade-all/>
             </cascade>
         </one-to-many>
 
