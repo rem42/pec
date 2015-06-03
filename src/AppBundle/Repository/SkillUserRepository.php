@@ -22,6 +22,14 @@ class SkillUserRepository{
         ;
     }
 
+    public function findById($id, User $user){
+        return $this->entityManager->getRepository('AppBundle:SkillUser')->findOneBy(array("id"=>$id, "user"=>$user));
+    }
+
+    public function findByUserSkill(User $user, Skill $skill){
+        return $this->entityManager->getRepository('AppBundle:SkillUser')->findOneBy(array("user"=>$user, "skill"=>$skill));
+    }
+
     public function findAll(){
         return $this->entityManager->getRepository('AppBundle:SkillUser')->findAll();
     }
@@ -32,7 +40,9 @@ class SkillUserRepository{
 
     public function findByUserForTimeline(User $user){
         return $this->entityManager->createQuery(
-            'SELECT su, s, sc
+            'SELECT su, s, sc, (
+                SELECT COUNT(usv) FROM AppBundle:UserSkillValidation usv WHERE usv.userSkill = su.id
+            ) as vote
             FROM AppBundle:SkillUser su
             LEFT JOIN AppBundle:Skill s WITH su.skill = s.id
             LEFT JOIN AppBundle:SkillCategory sc WITH s.skillCategory = sc.id
@@ -56,21 +66,6 @@ class SkillUserRepository{
     }
 
     public function findByCategory(User $user){
-        /*$query = $this->entityManager->getConnection()->prepare(
-            'SELECT sc.id, sc.name, s.id, s.name, su.id
-            FROM skill_user su
-            JOIN skill s ON s.id = su.skill_id
-            JOIN skill_category sc ON s.skill_category_id = sc.id
-            WHERE su.user_id = :user_id
-            '
-        );
-        $query->execute(
-            array(
-                'user_id', $user->getId()
-            )
-        );
-        return $query->fetchAll();*/
-
         return $this->entityManager->createQuery(
             'SELECT sc, s, su
             FROM AppBundle:SkillCategory sc
@@ -81,16 +76,3 @@ class SkillUserRepository{
             ->setParameter(':user_id', $user->getId())->getScalarResult();
     }
 }
-/*'SELECT sc.id, sc.name, s.id, s.name, su.id
-            FROM skill_category sc
-            JOIN skill s ON s.skill_category_id = sc.id
-            JOIN skill_user su ON s.id = su.skill_id
-            WHERE su.user_id = :user_id
-            '*/
-/*
-            'SELECT sc, s, su
-            FROM AppBundle:SkillCategory sc
-            JOIN AppBundle:Skill s WITH s.id = sc.skills
-            JOIN AppBundle:SkillUser su WITH s.skillsUser = su.id
-            WHERE su.user = :user_id
-            '*/

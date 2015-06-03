@@ -6,6 +6,7 @@ use AppBundle\Entity\Skill;
 use AppBundle\Entity\SkillCategory;
 use AppBundle\Entity\SkillUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\SkillUserAddType;
 use Ps\PdfBundle\Annotation\Pdf;
@@ -17,13 +18,20 @@ class SkillUserController extends Controller{
         $skillUser = new SkillUser();
         $form = $this->createForm(new SkillUserAddType(), $skillUser);
         $form->handleRequest($request);
+        $error = false;
 
         if ($form->isValid()) {
             $user = $this->get('appbundle.repository.user')->loadUserByUsername($this->getUser()->getUsername());
             $skillUser->setUser($user);
-            $this->get('appbundle.repository.skilluser')->save($skillUser);
 
-            return $this->redirect($this->generateUrl('userSkills'));
+            $existSkillUser = $this->get('appbundle.repository.skilluser')->findByUserSkill($user, $skillUser->getSkill());
+
+            if(!$existSkillUser){
+                $this->get('appbundle.repository.skilluser')->save($skillUser);
+            }else{
+                $form->get('skill')->addError(new FormError('Vous avez déjà cette compétence.'));
+                $error = true;
+            }
         }
 
         $userSkills = $this->get('appbundle.repository.skilluser')->findByUser($this->getUser());
@@ -31,6 +39,7 @@ class SkillUserController extends Controller{
         return $this->render('AppBundle:SkillUser:list.html.twig', array(
             'userSkills' => $userSkills,
             'form' => $form->createView(),
+            'error' => $error
         ));
     }
 

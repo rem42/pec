@@ -20,6 +20,20 @@
 	<!-- Bootstrap core CSS -->
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+	<link rel="stylesheet" href="{{ asset('bundles/app/css/material/material.css') }}">
+	<link rel="stylesheet" href="{{ asset('bundles/app/css/material/ripples.css') }}">
+	<link rel="stylesheet" href="{{ asset('bundles/app/css/material/roboto.css') }}">
+	<style>
+        body{
+            background-color: #ffffff
+        }
+		.row{
+			margin-right: 0px;
+			margin-left: 0px;
+		}
+	</style>
+
 	{% block stylesheets %}{% endblock %}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -31,11 +45,15 @@
     <![endif]-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
+	<script type="application/javascript">
+		$(document).ready(function(){
+			$.material.init();
+		});
+	</script>
 </head>
 <body>
-<div class="container">
-    <div class="navbar navbar-default navbar-fixed-top">
+<div class="container-fluid">
+    <div class="navbar navbar-material-light-blue navbar-fixed-top">
         <div class="container-fluid">
             {# Brand and toggle get grouped for better mobile display #}
             <div class="navbar-header">
@@ -45,12 +63,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                {% if app.user %}
-                    <a class="navbar-brand" href="{{ path('timeline') }}">PEC</a>
-                {% else %}
-                    <a class="navbar-brand" href="{{ path('login') }}">PEC</a>
-                {% endif %}
-
+	            {% if is_granted('ROLE_ADMIN') %}
+		            <a class="navbar-brand" href="{{ path('admin_index') }}">PEC</a>
+	            {% elseif is_granted('ROLE_USER') %}
+		            <a class="navbar-brand" href="{{ path('timeline') }}">PEC</a>
+	            {% else %}
+		            <a class="navbar-brand" href="{{ path('login') }}">PEC</a>
+	            {% endif %}
             </div>
 
             {# Collect the nav links, forms, and other content for toggling #}
@@ -59,7 +78,7 @@
                 {{ knp_menu_render('AppBundle:Builder:userMenu', {'currentClass': 'active', 'template': 'AppBundle:Menu:knp_menu.html.twig'}) }}
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" id="search" autocomplete="off">
+                        <input type="text" class="form-control" placeholder="Rechercher un étudiant" id="search" autocomplete="off">
                     </div>
                         <div id="searchResults">
                         </div>
@@ -74,7 +93,13 @@
     </div>
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.7/i18n/French.json"></script>
+<script src="{{ asset('bundles/app/js/material/material.js') }}"></script>
+<script src="{{ asset('bundles/app/js/material/ripples.js') }}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 <script>
     $('#search').keyup(function() {
         searchText = $(this).val();

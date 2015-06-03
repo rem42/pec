@@ -16,6 +16,9 @@ class SkillUserAddType extends AbstractType{
                 'class' => 'AppBundle\Entity\Skill',
                 'group_by' => 'skillCategory',
                 'property' => 'name',
+                'attr' => array(
+                    'class' => 'col-md-5'
+                )
             ))
             ->add('send', 'submit');
     }

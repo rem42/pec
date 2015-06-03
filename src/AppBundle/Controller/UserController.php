@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\UserRegisterType;
 use AppBundle\Form\Type\ChangePasswordType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Form\FormError;
 
 
 class UserController extends Controller{
@@ -17,7 +19,7 @@ class UserController extends Controller{
     public function registerAction(Request $request){
 
         if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))) {
-            return $this->redirect('home');
+            return $this->redirect('login');
         }
 
         $user = new User();
@@ -27,7 +29,26 @@ class UserController extends Controller{
 
         if ($form->isValid()) {
 
-            $user = $form->getData();
+            if (preg_match('/etu.univ-lyon1/', $user->getMail()) || preg_match('/univ-lyon1/', $user->getMail())) {
+                if(!preg_match('/etu.univ-lyon1/', $user->getMail())) {
+                    $user->setRoles(['ROLE_ADMIN']);
+                }
+            }
+            else {
+                $form->get('mail')->addError(new FormError("Vous devez utiliser l'adresse de l'université Lyon 1"));
+
+                return $this->render('AppBundle:User:register.html.twig', array(
+                    'form' => $form->createView(),
+                ));
+            }
+
+            //$message = \Swift_Message::newInstance()
+            //    ->setSubject('Hello Email')
+            //    ->setFrom('moi@moi.fr')
+            //    ->setTo($user->getMail())
+            //    ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_validation', array('token' => $user->getToken())))
+            //;
+            //$this->get('mailer')->send($message);
 
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($user);
@@ -39,10 +60,12 @@ class UserController extends Controller{
             $user->setUpdatedAt($date);
 
             $this->get('appbundle.repository.user')->save($user);
-            $token = new UsernamePasswordToken($user, null, 'appbundle.repository.user', $user->getRoles());
-            $this->get('security.token_storage')->setToken($token);
+            //$token = new UsernamePasswordToken($user, null, 'appbundle.repository.user', $user->getRoles());
+            //$this->get('security.token_storage')->setToken($token);
 
-            return $this->redirect($this->generateUrl('home'));
+            return $this->render('AppBundle:Security:login.html.twig', array(
+                'mail_send' => true
+            ));
         }
 
         return $this->render('AppBundle:User:register.html.twig', array(
@@ -142,15 +165,17 @@ class UserController extends Controller{
 
         $skills = array();
         foreach ($userSkills as $us) {
-            $text = $us["s_name"];
-            if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER')) && $user->getId() != $this->getUser()->getId()){
-                $text .= ' <input type="button" class="validUser btn btn-default" data-url="'.$this->generateUrl('userValidation', array("id"=> $us["su_id"])).'" value="Valider cette compétence" />';
+            $text = "";
+            if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))){
+                if(method_exists($this->getUser(), 'getId') && $user->getId() != $this->getUser()->getId()) {
+                    $text .= ' <input type="button" class="validUser btn btn-default" data-url="' . $this->generateUrl('userValidation', array("id" => $us["su_id"])) . '" value="+1" /> <span class="badge">'.$us["vote"].'</span>';
+                }
             }
             $skills[] = [
                 'startDate' => $us["su_dateStart"]->format('m/d/Y'),
                 'endDate' => $us["su_dateEnd"]->format('m/d/Y'),
-                'headline' => $us["sc_name"],
-                'text' => $text
+                'text' => $us["sc_name"].$text,
+                'headline' => $us["s_name"]
             ];
         }
         $timeLine = [
@@ -172,5 +197,22 @@ class UserController extends Controller{
         $users = $this->get("appbundle.repository.user")->findUsers($string);
 
         return new JsonResponse($users);
+    }
+
+    public function validationAction(Request $request, $token){
+
+        $user = $this->get('appbundle.repository.user')->loadUserByToken($token);
+
+        if($user) {
+            $this->get('appbundle.repository.user')->validationAccount($user);
+            return $this->render('AppBundle:Security:login.html.twig', array(
+                'validation_account' => true
+            ));
+        }
+        else {
+            return $this->render('AppBundle:Security:login.html.twig', array(
+                'validation_account' => false
+            ));
+        }
     }
 }

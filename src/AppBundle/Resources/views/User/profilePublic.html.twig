@@ -38,7 +38,7 @@
 				    {
 					    if(response){
 						    console.log($(this));
-							$(this).html('poney');
+							$(this).content('poney');
 					    }else{
 						    alert('Vous ne pouvez pas valider plusieurs fois');
 					    }
@@ -48,5 +48,5 @@
 		    });
 	    }
     </script>
-    <script type="text/javascript" src="{{ asset('bundles/app/js/storyjs-embed.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/timeline/storyjs-embed.js') }}"></script>
 {% endblock %}

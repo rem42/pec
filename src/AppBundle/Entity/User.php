@@ -15,6 +15,8 @@ class User implements UserInterface{
     protected $username;
     protected $password;
     protected $salt = "";
+    protected $token;
+    protected $isActivated;
     protected $createdAt;
     protected $updatedAt;
 
@@ -28,6 +30,8 @@ class User implements UserInterface{
         $this->roles = ['ROLE_USER'];
         $this->userSkillsValidation = new ArrayCollection();
         $this->skillsUser = new ArrayCollection();
+        $this->token = uniqid("", true);
+        $this->isActivated = false;
     }
 
     public function getId()
@@ -155,6 +159,38 @@ class User implements UserInterface{
         return $this->userCategory;
     }
 
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActivated()
+    {
+        return $this->isActivated;
+    }
+
+    /**
+     * @param mixed $isActivated
+     */
+    public function setIsActivated($isActivated)
+    {
+        $this->isActivated = $isActivated;
+    }
+
     public function setUserCategory($userCategory)
     {
         $this->userCategory = $userCategory;
@@ -164,5 +200,4 @@ class User implements UserInterface{
     {
         $this->password = null;
     }
-
 }

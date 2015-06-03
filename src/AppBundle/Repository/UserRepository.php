@@ -43,6 +43,15 @@ class UserRepository implements UserProviderInterface{
         return $user;
     }
 
+    public function loadUserByToken($token){
+        $user = $this->entityManager
+            ->getRepository("AppBundle:User")
+            ->findOneBy(array("token" => $token))
+        ;
+
+        return $user;
+    }
+
     public function refreshUser(UserInterface $user)
     {
         $refreshedUser = $this->loadUserByUsername($user->getUsername());
@@ -69,6 +78,13 @@ class UserRepository implements UserProviderInterface{
         return $this->entityManager->createQuery('SELECT u FROM AppBundle:User u WHERE u.name LIKE :string OR u.surname LIKE :string OR u.username LIKE :string')
             ->setParameter('string',$string.'%')
             ->getArrayResult();
+    }
+
+    public function validationAccount(User $user) {
+        $user->setToken(null);
+        $user->setIsActivated(true);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
 }
