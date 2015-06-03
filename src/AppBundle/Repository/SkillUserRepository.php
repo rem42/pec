@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Skill;
 use AppBundle\Entity\SkillUser;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
@@ -19,6 +20,14 @@ class SkillUserRepository{
             ->getRepository("AppBundle:SkillUser")
             ->findOneBy(["id" => $id])
         ;
+    }
+
+    public function findById($id, User $user){
+        return $this->entityManager->getRepository('AppBundle:SkillUser')->findOneBy(array("id"=>$id, "user"=>$user));
+    }
+
+    public function findByUserSkill(User $user, Skill $skill){
+        return $this->entityManager->getRepository('AppBundle:SkillUser')->findOneBy(array("user"=>$user, "skill"=>$skill));
     }
 
     public function findAll(){
@@ -48,9 +57,5 @@ class SkillUserRepository{
     public function delete(SkillUser $skillUser){
         $this->entityManager->remove($skillUser);
         $this->entityManager->flush();
-    }
-
-    public function findById($id, User $user){
-        return $this->entityManager->getRepository('AppBundle:SkillUser')->findOneBy(array("id"=>$id, "user"=>$user));
     }
 }
