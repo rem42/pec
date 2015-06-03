@@ -18,6 +18,7 @@
 
     <route id="reportUserSkills" path="/utilisateur/competences/export">
         <default key="_controller">AppBundle:SkillUser:export</default>
+        <default key="_format">pdf</default>
     </route>
 
     <route id="userSkillDelete" path="/utilisateur/competences/supprimer/{id}">

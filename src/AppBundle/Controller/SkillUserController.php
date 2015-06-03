@@ -75,6 +75,9 @@ class SkillUserController extends Controller{
 
     }
 
+    /**
+     * @Pdf()
+     */
     public function exportAction()
     {
         //$format = $this->get('request')->get('_format');

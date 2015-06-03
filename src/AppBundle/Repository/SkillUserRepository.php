@@ -61,10 +61,6 @@ class SkillUserRepository{
         $this->entityManager->flush();
     }
 
-    public function findById($id, User $user){
-        return $this->entityManager->getRepository('AppBundle:SkillUser')->findOneBy(array("id"=>$id, "user"=>$user));
-    }
-
     public function findByCategory(User $user){
         return $this->entityManager->createQuery(
             'SELECT sc, s, su
