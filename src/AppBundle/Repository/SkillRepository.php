@@ -24,6 +24,11 @@ class SkillRepository{
             ;
     }
 
+    public function delete(Skill $skill){
+        $this->entityManager->remove($skill);
+        $this->entityManager->flush();
+    }
+
     public function save(Skill $skill){
         $this->entityManager->persist($skill);
         $this->entityManager->flush();
