@@ -89,7 +89,8 @@
 <script src="//cdn.datatables.net/plug-ins/1.10.7/i18n/French.json"></script>
 <script src="{{ asset('bundles/app/js/material/material.js') }}"></script>
 <script src="{{ asset('bundles/app/js/material/ripples.js') }}"></script>
-
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 <script>
     $('#search').keyup(function() {
         searchText = $(this).val();
