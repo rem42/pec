@@ -42,13 +42,13 @@ class UserController extends Controller{
                 ));
             }
 
-            //$message = \Swift_Message::newInstance()
-            //    ->setSubject('Hello Email')
-            //    ->setFrom('moi@moi.fr')
-            //    ->setTo($user->getMail())
-            //    ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_validation', array('token' => $user->getToken())))
-            //;
-            //$this->get('mailer')->send($message);
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Hello Email')
+                ->setFrom('moi@moi.fr')
+                ->setTo($user->getMail())
+                ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_validation', array('token' => $user->getToken()), true))
+            ;
+            $this->get('mailer')->send($message);
 
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($user);
