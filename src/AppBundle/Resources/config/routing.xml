@@ -23,6 +23,10 @@
         <default key="_controller">AppBundle:SkillUser:list</default>
     </route>
 
+    <route id="reportUserSkills" path="/utilisateur/competences/export">
+        <default key="_controller">AppBundle:SkillUser:export</default>
+    </route>
+
     <route id="userSkillDelete" path="/utilisateur/competences/supprimer/{id}">
         <default key="_controller">AppBundle:SkillUser:delete</default>
     </route>
