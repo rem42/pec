@@ -9,10 +9,10 @@ class UserRegisterType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text')
-            ->add('surname', 'text')
-            ->add('username', 'text')
-            ->add('mail', 'email')
+        $builder->add('name', 'text', array('label' => 'Prénom'))
+            ->add('surname', 'text', array('label' => 'Nom'))
+            ->add('username', 'text', array('label' => 'Pseudo'))
+            ->add('mail', 'email', array('label' => 'Email (celui de Lyon 1)'))
             ->add('password', 'repeated', array(
                 'type' => 'password',
                 'invalid_message' => 'Les mots de passe doivent correspondre',
