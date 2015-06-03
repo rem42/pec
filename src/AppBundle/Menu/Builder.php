@@ -21,6 +21,8 @@ class Builder extends ContainerAware
         }else{
             $menu->addChild('Ma timeline', array('route' => 'timeline'));
             $menu->addChild('Mes compétences', array('route' => 'userSkills'));
+        }
+        if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN'))){
             $menu->addChild('Compétences', array('route' => 'addskill'));
             $menu->addChild('Catégories de compétences', array('route' => 'addskillcategory'));
         }
