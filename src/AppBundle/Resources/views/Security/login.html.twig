@@ -3,13 +3,30 @@
 {% block body %}
 
 
-	{% if error %}
-		<div>{{ error.message }}</div>
-	{% endif %}
+
+    {% if validation_account is defined %}
+        {% if validation_account %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Votre compte est maintenant activé, vous n'avez plus qu'à vous connecter
+            </div>
+        {% else %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Désolé mais l'adresse de validation est incorrecte, vérifiez là ou contacter un administrateur
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if error is defined %}
+	    {% if error %}
+	    	<div>{{ error.message }}</div>
+	    {% endif %}
+    {% endif %}
 
 	<form action="{{ path('login_check') }}" method="post">
-		<label for="username">Login :</label>
-		<input type="text" id="username" name="_username" value="{{ last_username }}" />
+		<label for="username">Pseudo :</label>
+		<input type="text" id="username" name="_username" value="{% if last_username is defined %}{{ last_username }}{% endif %}" />
 
 		<label for="password">Mot de passe :</label>
 		<input type="password" id="password" name="_password" />

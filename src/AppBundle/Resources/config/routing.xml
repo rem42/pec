@@ -52,6 +52,10 @@
         <option key="expose">true</option>
     </route>
 
+    <route id="public_validation" path="/public/validation/{token}">
+        <default key="_controller">AppBundle:User:validation</default>
+    </route>
+
     <route id="search" path="/recherche">
         <default key="_controller">AppBundle:User:search</default>
     </route>
