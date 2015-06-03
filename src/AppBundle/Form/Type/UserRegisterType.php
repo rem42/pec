@@ -20,7 +20,7 @@ class UserRegisterType extends AbstractType{
                 'first_options'  => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Mot de passe (validation)'),
             ))
-            ->add('send', 'submit', array('label' => "S'enregistrer",  'attr' => array('class'=>' btn btn-success btn-lg btn-block form'));
+            ->add('send', 'submit', array('label' => "S'enregistrer",  'attr' => array('class'=>' btn btn-success btn-lg btn-block form')));
     }
     public function getName()
     {
