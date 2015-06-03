@@ -63,7 +63,9 @@ class UserController extends Controller{
             //$token = new UsernamePasswordToken($user, null, 'appbundle.repository.user', $user->getRoles());
             //$this->get('security.token_storage')->setToken($token);
 
-            return $this->redirect($this->generateUrl('timeline'));
+            return $this->render('AppBundle:Security:login.html.twig', array(
+                'mail_send' => true
+            ));
         }
 
         return $this->render('AppBundle:User:register.html.twig', array(
