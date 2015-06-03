@@ -164,8 +164,10 @@ class UserController extends Controller{
         $skills = array();
         foreach ($userSkills as $us) {
             $text = $us["s_name"];
-            if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER')) && $user->getId() != $this->getUser()->getId()){
-                $text .= ' <input type="button" class="validUser btn btn-default" data-url="'.$this->generateUrl('userValidation', array("id"=> $us["su_id"])).'" value="Valider cette compétence" />';
+            if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))){
+                if(method_exists($this->getUser(), 'getId') && $user->getId() != $this->getUser()->getId()) {
+                    $text .= ' <input type="button" class="validUser btn btn-default" data-url="' . $this->generateUrl('userValidation', array("id" => $us["su_id"])) . '" value="Valider cette compétence" />';
+                }
             }
             $skills[] = [
                 'startDate' => $us["su_dateStart"]->format('m/d/Y'),
