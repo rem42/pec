@@ -246,7 +246,8 @@ class UserController extends Controller{
         ];
 
         return $this->render('AppBundle:User:profilePublic.html.twig', array(
-            'timeLine' => $timeLine
+            'timeLine' => $timeLine,
+            'user' => $user
         ));
     }
 
