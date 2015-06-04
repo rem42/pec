@@ -6,6 +6,10 @@
                 padding: 0px;
                 margin: 0px;
             }
+	        #loading{
+		        display: none;
+		        border: none;
+	        }
         </style>
     {% endblock %}
     {% block js %}
@@ -30,21 +34,35 @@
 	    function ajoutEvent(){
 		    $('.validUser').unbind('click').click(function(){
 			    var input = $(this);
+			    $(input).next().fadeIn();
 			    $.ajax({
 				    type: "GET",
 				    url: $(this).data('url'),
 				    dataType: "json",
 				    success : function(response)
 				    {
-					    if(response){
-						    console.log($(this));
-							$(this).content('poney');
+					    if(response.status){
+						    $(input).addClass('btn-success').addClass('checked').removeClass('btn-info').val('+1');
+						    $(input).next().fadeOut();
+						    $(input).next().next().text(response.count);
+						    changeHover();
 					    }else{
-						    alert('Vous ne pouvez pas valider plusieurs fois');
+						    $(input).addClass('btn-info').removeClass('btn-success').removeClass('btn-danger').removeClass('checked').val('+1');
+						    $(input).next().fadeOut();
+						    $(input).next().next().text(response.count);
+						    $(input).unbind('mouseenter mouseleave');
+						    changeHover();
 					    }
 				    }
 			    });
-			    $(this).html('coucou');
+		    });
+		    changeHover();
+	    }
+	    function changeHover(){
+		    $('.validUser.checked').unbind('mouseenter mouseleave').hover(function(){
+			    $(this).addClass('btn-danger').removeClass('btn-success').val('-1');
+		    }, function(){
+			    $(this).removeClass('btn-danger').addClass('btn-success').val('+1');
 		    });
 	    }
     </script>

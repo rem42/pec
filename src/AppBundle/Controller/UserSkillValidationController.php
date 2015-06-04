@@ -13,21 +13,26 @@ class UserSkillValidationController extends Controller {
         if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))){
             $user = $this->get('appbundle.repository.user')->loadUserByUsername($this->getUser()->getUsername());
             $skillUser = $this->get('appbundle.repository.skilluser')->loadById($id);
+            /*p($skillUser->getUser()->getId());
+            d($user->getId());*/
             if ($skillUser->getUser()->getId() == $user->getId()) {
                 return new JsonResponse(false);
             }
             $userSkillValidation = new UserSkillValidation();
             $userSkillValidation->setUser($user);
             $userSkillValidation->setUserSkill($skillUser);
-            $userSkillValidation->setValidationDate(new \DateTime('NOW'));
 
             $exist = $this->get('appbundle.repository.userskillvalidation')->findOneByUserSkill($user, $skillUser);
             if (!$exist) {
+                $userSkillValidation->setValidationDate(new \DateTime('NOW'));
                 $this->get('appbundle.repository.userskillvalidation')->save($userSkillValidation);
-                return new JsonResponse(true);
+                $status = true;
             } else {
-                return new JsonResponse(false);
+                $this->get('appbundle.repository.userskillvalidation')->remove($exist);
+                $status = false;
             }
+            $count = $this->get('appbundle.repository.userskillvalidation')->countByUserSkill($skillUser);
+            return new JsonResponse(array('status' => $status, 'count' => $count["number"]));
         }else{
             return new JsonResponse(false);
         }
