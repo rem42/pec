@@ -29,6 +29,11 @@ class SkillRepository{
         $this->entityManager->flush();
     }
 
+    public function merge(Skill $skill){
+        $this->entityManager->merge($skill);
+        $this->entityManager->flush();
+    }
+
     public function save(Skill $skill){
         $this->entityManager->persist($skill);
         $this->entityManager->flush();
