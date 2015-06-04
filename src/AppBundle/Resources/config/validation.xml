@@ -55,6 +55,9 @@
             <option name="fields">name</option>
             <option name="message">Cette compétence existe déja.</option>
         </constraint>
+        <property name="name">
+            <constraint name="NotBlank"/>
+        </property>
         <property name="file">
             <constraint name="File">
                 <option name="maxSize">6000000</option>
