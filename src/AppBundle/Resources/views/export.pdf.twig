@@ -10,9 +10,9 @@
                 {% for userSkillCategory in userSkillsCategories %}
                     {% if previous_cat != userSkillCategory.sc_name %}
                         {% set previous_cat = userSkillCategory.sc_name %}
-                        <li><p>{{ userSkillCategory.sc_name }}</p></li>
+                        <li>{{ userSkillCategory.sc_name }}</li>
                     {% endif %}
-                    <p>{{ userSkillCategory.s_name }}</p>
+                    {{ userSkillCategory.s_name }}
                 {% endfor %}
             </ul>
         </div>

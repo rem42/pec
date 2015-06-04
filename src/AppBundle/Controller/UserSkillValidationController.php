@@ -37,4 +37,21 @@ class UserSkillValidationController extends Controller {
             return new JsonResponse(false);
         }
     }
+
+    public function infoAction(Request $request){
+        if($request->get("id")!=""){
+            $userSkillValidations = $this->get('appbundle.repository.userskillvalidation')->findById($request->get("id"));
+            $name = array();
+            foreach ($userSkillValidations as $usv) {
+                $name[] = $usv->getUser()->getName().' '.$usv->getUser()->getSurname();
+            }
+            if(sizeof($name)>0){
+                return new JsonResponse(array('person' => $name));
+            }else{
+                return new JsonResponse(false);
+            }
+
+        }
+        return new JsonResponse(false);
+    }
 }

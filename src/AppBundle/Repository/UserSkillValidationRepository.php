@@ -23,6 +23,13 @@ class UserSkillValidationRepository {
             ;
     }
 
+    public function findById($id){
+        return $user = $this->entityManager
+            ->getRepository("AppBundle:UserSkillValidation")
+            ->findBy(["userSkill" => $id])
+            ;
+    }
+
     public function countByUserSkill(SkillUser $skillUser)
     {
         return $this->entityManager->createQuery(

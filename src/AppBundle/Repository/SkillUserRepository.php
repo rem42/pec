@@ -38,9 +38,10 @@ class SkillUserRepository{
         return $this->entityManager->getRepository('AppBundle:SkillUser')->findBy(array('user' => $user));
     }
 
-    public function findByUserForTimeline(User $user, User $userConnected){
-        return $this->entityManager->createQuery(
-            'SELECT su, s, sc, (
+    public function findByUserForTimeline(User $user, User $userConnected = NULL){
+        if($userConnected){
+            return $this->entityManager->createQuery(
+                'SELECT su, s, sc, (
                 SELECT COUNT(usv2) FROM AppBundle:UserSkillValidation usv2 WHERE usv2.userSkill = su.id
             ) as vote, usv.id
             FROM AppBundle:SkillUser su
@@ -49,7 +50,19 @@ class SkillUserRepository{
             LEFT JOIN AppBundle:UserSkillValidation usv WITH su.id = usv.userSkill AND usv.user = :user_connected_id
             WHERE su.user = :user_id
             '
-        )->setParameter(':user_id', $user->getId())->setParameter(':user_connected_id', $userConnected->getId())->getScalarResult();
+            )->setParameter(':user_id', $user->getId())->setParameter(':user_connected_id', $userConnected->getId())->getScalarResult();
+        }else{
+            return $this->entityManager->createQuery(
+                'SELECT su, s, sc, (
+                SELECT COUNT(usv2) FROM AppBundle:UserSkillValidation usv2 WHERE usv2.userSkill = su.id
+            ) as vote
+            FROM AppBundle:SkillUser su
+            LEFT JOIN AppBundle:Skill s WITH su.skill = s.id
+            LEFT JOIN AppBundle:SkillCategory sc WITH s.skillCategory = sc.id
+            WHERE su.user = :user_id
+            '
+            )->setParameter(':user_id', $user->getId())->getScalarResult();
+        }
     }
 
     public function save(SkillUser $skillUser){

@@ -10,6 +10,9 @@
 		        display: none;
 		        border: none;
 	        }
+	        .badge{
+		        cursor: pointer;
+	        }
         </style>
     {% endblock %}
     {% block js %}
@@ -23,6 +26,32 @@
 
     <h1>Timeline</h1>
     <div id="timeline-embed"></div>
+
+
+	<div id="person" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Personnes qui ont validé la compétence</h4>
+				</div>
+				<div class="modal-body">
+					<ul id="personlist"></ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
 
     <script type="text/javascript">
 	    var timeline_config = {
@@ -52,6 +81,33 @@
 						    $(input).next().next().text(response.count);
 						    $(input).unbind('mouseenter mouseleave');
 						    changeHover();
+					    }
+				    }
+			    });
+		    });
+		    $('.badge').unbind('click').click(function(){
+			    var input = $(this);
+			    $(input).next().fadeIn();
+			    $.ajax({
+				    type: "GET",
+				    url: $(this).data('url'),
+				    dataType: "json",
+				    success : function(response)
+				    {
+					    if(response){
+						    var persons = response.person;
+						    $("#personlist").empty();
+						    var personlist = document.getElementById("personlist");
+
+						    persons.forEach(function (person) {
+							    var li = document.createElement("li");
+
+							    li.textContent = person;
+							    personlist.appendChild(li);
+						    });
+						    $('#person').modal('show');
+					    }else{
+						    console.log(response);
 					    }
 				    }
 			    });
