@@ -32,9 +32,6 @@ class UserRepository implements UserProviderInterface{
 
     public function loadUserByEmail($email)
     {
-        echo $email;
-        die();
-
         $user = $this->entityManager
             ->getRepository("AppBundle:User")
             ->findOneBy(array("mail" => $email))
