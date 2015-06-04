@@ -14,6 +14,7 @@ class SkillAddType extends AbstractType{
                 'class' => 'AppBundle\Entity\SkillCategory',
                 'property' => 'name',
             ))
+            ->add('file', 'file')
             ->add('send', 'submit');
     }
     public function getName()
