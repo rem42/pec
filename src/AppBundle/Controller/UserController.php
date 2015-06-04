@@ -280,7 +280,6 @@ class UserController extends Controller{
         $em = $this->getDoctrine()->getManager();
 
         $user = $this->get('appbundle.repository.user')->loadUserByEmail($request->get('email'));
-
         if($user) {
 
             //$message = \Swift_Message::newInstance()

@@ -50,4 +50,11 @@
 
         </constraint>
     </class>
+    <class name="AppBundle\Entity\Skill">
+        <property name="file">
+            <constraint name="File">
+                <option name="maxSize">6000000</option>
+            </constraint>
+        </property>
+    </class>
 </constraint-mapping>

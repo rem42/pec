@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Skill;
+use AppBundle\Form\Type\SkillEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\SkillAddType;
@@ -39,12 +40,12 @@ class SkillController extends Controller{
     public function editAction(Request $request){
         if($request->get("id")!=""){
             $skill = $this->get('appbundle.repository.skill')->findById($request->get("id"));
-            $form = $this->createForm(new SkillAddType(), $skill);
+            $form = $this->createForm(new SkillEditType(), $skill);
             $form->handleRequest($request);
             $error = false;
 
             if ($form->isValid()) {
-                $this->get('appbundle.repository.skill')->save($skill);
+                $this->get('appbundle.repository.skill')->merge($skill);
                 return $this->redirect($this->generateUrl('addskill'));
             }
 
