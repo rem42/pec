@@ -62,11 +62,11 @@
         <default key="_controller">AppBundle:User:validation</default>
     </route>
 
-    <route id="public_lost_password" path="/public/lost/password">
+    <route id="public_lost_password" path="/public/perdu/motdepasse">
         <default key="_controller">AppBundle:User:lostPassword</default>
     </route>
 
-    <route id="public_new_password" path="/public/new/password/{token}">
+    <route id="public_new_password" path="/public/nouveau/motdepasse/{token}">
         <default key="_controller">AppBundle:User:newPassword</default>
     </route>
 

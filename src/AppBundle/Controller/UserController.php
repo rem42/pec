@@ -207,7 +207,13 @@ class UserController extends Controller{
     public function profilePublicAction($id)
     {
         $user = $this->get('appbundle.repository.user')->loadUserById($id);
+
+        if($user->getIsPrivate()) {
+            return $this->redirect($this->generateUrl('login'));
+        }
+
         $userSkills = $this->get('appbundle.repository.skilluser')->findByUserForTimeline($user, $this->getUser());
+
         $skills = array();
         foreach ($userSkills as $us) {
             $text = "";
