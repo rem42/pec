@@ -19,6 +19,8 @@ class SkillController extends Controller{
 
         if ($form->isValid()) {
             $this->get('appbundle.repository.skill')->save($skill);
+        }else{
+            $error = true;
         }
 
         $skills = $this->get('appbundle.repository.skill')->liste();
