@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Skill;
 use AppBundle\Entity\SkillUser;
 use AppBundle\Form\Type\ChangePersonalDataType;
 use AppBundle\Form\Type\ChangeProfileType;
@@ -216,6 +217,9 @@ class UserController extends Controller{
 
         $skills = array();
         foreach ($userSkills as $us) {
+            $skill = new Skill();
+            $skill->setId($us["s_id"]);
+            $skill->setPath($us["s_path"]);
             $text = "";
             if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))){
                 if(method_exists($this->getUser(), 'getId') && $user->getId() != $this->getUser()->getId()) {
@@ -239,7 +243,11 @@ class UserController extends Controller{
                 'startDate' => $us["su_dateStart"]->format('m/d/Y'),
                 'endDate' => $us["su_dateEnd"]->format('m/d/Y'),
                 'text' => $us["sc_name"].$text,
-                'headline' => $us["s_name"]
+                'headline' => $us["s_name"],
+                'asset' => [
+                    'media' => $skill->getWebPath(),
+                    'thumbnail' => $skill->getWebPath(),
+                ]
             ];
         }
         $timeLine = [
