@@ -58,6 +58,14 @@
         <default key="_controller">AppBundle:User:validation</default>
     </route>
 
+    <route id="public_lost_password" path="/public/lost/password">
+        <default key="_controller">AppBundle:User:lostPassword</default>
+    </route>
+
+    <route id="public_new_password" path="/public/new/password">
+        <default key="_controller">AppBundle:User:newPassword</default>
+    </route>
+
     <route id="search" path="/recherche">
         <default key="_controller">AppBundle:User:search</default>
     </route>

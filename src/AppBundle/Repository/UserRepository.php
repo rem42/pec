@@ -30,6 +30,19 @@ class UserRepository implements UserProviderInterface{
         return $user;
     }
 
+    public function loadUserByEmail($email)
+    {
+        echo $email;
+        die();
+
+        $user = $this->entityManager
+            ->getRepository("AppBundle:User")
+            ->findOneBy(array("mail" => $email))
+        ;
+
+        return $user;
+    }
+
     public function loadUserById($id){
         $user = $this->entityManager
             ->getRepository("AppBundle:User")
@@ -37,7 +50,7 @@ class UserRepository implements UserProviderInterface{
         ;
 
         if (null === $user) {
-            throw new UsernameNotFoundException(sprintf('User "%s" not found.', $username));
+            throw new UsernameNotFoundException(sprintf('User "%s" not found.'));
         }
 
         return $user;

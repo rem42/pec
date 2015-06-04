@@ -261,4 +261,71 @@ class UserController extends Controller{
             ));
         }
     }
+
+    public function lostPasswordAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->get('appbundle.repository.user')->loadUserByToken(1);
+
+        if($user) {
+
+            //$message = \Swift_Message::newInstance()
+            //    ->setSubject("Demande d'un nouveau mot de passe")
+            //    ->setFrom('moi@moi.fr')
+            //    ->setTo($email)
+            //    ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_new_password', array('token' => $user->getToken()), true))
+            //;
+            //$this->get('mailer')->send($message);
+
+            $user->setToken(uniqid("", true));
+            $em->merge($user);
+            $em->flush();
+        }
+        else {
+
+            return new Response(0);
+        }
+
+        return new Response(1);
+
+        //return $this->redirect($this->generateUrl('login'));
+    }
+
+    public function newPasswordAction(Request $request, $token){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->get('appbundle.repository.user')->loadUserByToken($token);
+
+        $formChangePassword = $this->createForm(new ChangePasswordType());
+
+        if($user) {
+
+            if($request->request->has('changePassword')){
+
+                $formChangePassword->handleRequest($request);
+
+                if ($formChangePassword->isValid()) {
+
+                    // On récupère les data du formulaire
+                    $password = $request->request->get('changePassword');
+
+                    $factory = $this->get('security.encoder_factory');
+                    $encoder = $factory->getEncoder($user);
+                    $password = $encoder->encodePassword($password['password']['first'], $user->getSalt());
+                    $user->setPassword($password);
+
+                    $em->merge($user);
+                    $em->flush();
+                }
+            }
+        }
+        else {
+
+            return $this->render('AppBundle:Security:login.html.twig', array(
+                'validation_account' => false
+            ));
+        }
+    }
 }

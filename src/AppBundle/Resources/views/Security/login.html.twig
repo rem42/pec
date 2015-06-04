@@ -27,6 +27,15 @@
         {% endif %}
     {% endif %}
 
+    {% if mail_new_password_send is defined %}
+        {% if mail_send %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Un email pour redéfinir votre mot de passe vient de vous être envoyé.
+            </div>
+        {% endif %}
+    {% endif %}
+
     {% if error is defined %}
 	    {% if error %}
             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -148,7 +157,10 @@
 					<button type="submit" class="btn btn-success form">Connexion</button>
 				</form>
                 <p style="color:#FFFFFF">Vous n'arrivez pas à vous connecter ? Avez-vous bien validé votre compte ?</p>
-                <p style="color:#FFFFFF">Vous avez oubliez votre mot de passe ? <a>Cliquez-ici</a></p>
+                <p style="color:#FFFFFF">Vous avez oubliez votre mot de passe ?  <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#lostpassword">
+                        cliquez-ici
+                    </button></p>
 			</div>
 
 		</div>
@@ -188,5 +200,54 @@
 		<div class="footer">
 		</div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="lostpassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Mot de passe oublié</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                        <p>Veuillez renseigner votre adresse email pour recevoir un email permettant de redéfinir votre mot de passe</p>
+                        <input class="form-control" placeholder="Votre email" type="email" name="email" id="change-email" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="button-change-email" type="button" class="btn btn-primary">Me renvoyer un email</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 	</div>
+
+    <script>
+
+        $(document).ready(function() {
+
+            $('#button-change-email').on('click', function() {
+
+                var email = $('#change-email').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('public_lost_password') }}",
+                    dataType: "text",
+                    data: {email : email},
+                    success : function(response)
+                    {
+                        if(response) {
+                            alert('ok');
+                        }
+                        else {
+                            alert('erreur');
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
 {% endblock %}
