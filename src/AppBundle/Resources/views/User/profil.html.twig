@@ -2,7 +2,15 @@
 
 {% block body %}
 <div class="container">
-    <h1>Votre Profil</h1>
+
+    <h1>Mon profil</h1>
+
+    {% if profileUpdate %}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            Les modifications seront éffectives après votre reconnexion
+        </div>
+    {% endif %}
 
     <div role="tabpanel">
 
@@ -16,6 +24,8 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="voir">
+
+                <h2>Récapitulatif de votre compte</h2>
 
                 <div class="group">
                     <label>Prénom</label>
@@ -37,6 +47,15 @@
                     <p>{{ app.user.mail }}</p>
                 </div>
 
+                <div class="group">
+                    <label>Visibilité du profil</label>
+                    {% if profileState %}
+                        <p>Votre profil est actuellement privée</p>
+                    {% else %}
+                        <p>Votre profil est actuellement public</p>
+                    {% endif %}
+                </div>
+
             </div>
 
             <div role="tabpanel" class="tab-pane" id="modifier">
@@ -53,7 +72,13 @@
 
             <div role="tabpanel" class="tab-pane" id="parametres">
 
-                <p>A définir</p>
+                <h2>Gestion profil</h2>
+
+                {{ form(formChangeProfil) }}
+
+                <h2>Gestion compte</h2>
+
+                <button id="delete-account" class="btn btn-danger">Supprimer mon compte (cette action est définitive)</button>
 
             </div>
 
@@ -81,6 +106,15 @@
 			$('.form-filter select').on('change', function () {
 				$('.form-filter').submit();
 			});
+
+            $('#delete-account').on('click', function() {
+                if(confirm("Etes-vous sur de vouloir supprimer votre compte ?")) {
+                    window.location.replace("{{ path("user_delete") }}");
+                }
+                else {
+                    console.log("compte non supprimé");
+                }
+            })
 		});
 	</script>
 </div>

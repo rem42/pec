@@ -74,6 +74,12 @@ class UserRepository implements UserProviderInterface{
         $this->entityManager->flush();
     }
 
+    public function delete(User $user){
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+    }
+
+
     public function findUsers($string){
         return $this->entityManager->createQuery('SELECT u FROM AppBundle:User u WHERE u.name LIKE :string OR u.surname LIKE :string OR u.username LIKE :string')
             ->setParameter('string',$string.'%')

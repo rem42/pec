@@ -17,8 +17,8 @@ class ChangePersonalDataType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', 'text', array('data' => $this->user->getName()))
-            ->add('surname', 'text', array('data' => $this->user->getUsername()))
-            ->add('username', 'text', array('data' => $this->user->getSurname()))
+            ->add('surname', 'text', array('data' => $this->user->getSurname()))
+            ->add('username', 'text', array('data' => $this->user->getUsername()))
             ->add('mail', 'email', array('data' => $this->user->getMail()))
             ->add('Modifier mes informations', 'submit')
         ;

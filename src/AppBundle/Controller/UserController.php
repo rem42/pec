@@ -3,6 +3,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\SkillUser;
 use AppBundle\Form\Type\ChangePersonalDataType;
+use AppBundle\Form\Type\ChangeProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -77,10 +78,13 @@ class UserController extends Controller{
 
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->getUser();
+        $user = $this->get('appbundle.repository.user')->loadUserByUsername($this->getUser()->getUsername());
 
         $formChangePassword = $this->createForm(new ChangePasswordType());
         $formChangePersonalData = $this->createForm(new ChangePersonalDataType($this->getUser()));
+        $formChangeProfile = $this->createForm(new ChangeProfileType());
+
+        $profileUpdate = false;
 
         // Traitement du formulaire pour changer de mot de passe
         if($request->request->has('changePassword')){
@@ -89,7 +93,7 @@ class UserController extends Controller{
 
             if ($formChangePassword->isValid()) {
 
-                // On récupère les data du formulaure
+                // On récupère les data du formulaire
                 $password = $request->request->get('changePassword');
 
                 $factory = $this->get('security.encoder_factory');
@@ -99,9 +103,11 @@ class UserController extends Controller{
 
                 $em->merge($user);
                 $em->flush();
+
+                $profileUpdate = true;
             }else{
                 //d($formChangePassword->getErrorsAsString());
-                return $this->redirect($this->generateUrl('home')."#modifier");
+                //return $this->redirect($this->generateUrl('home')."#modifier");
             }
         }
 
@@ -112,7 +118,7 @@ class UserController extends Controller{
 
             if ($formChangePersonalData->isValid()) {
 
-                // On récupère les data du formulaure
+                // On récupère les data du formulaire
                 $data = $request->request->get('changePersonalData');
 
                 $user->setName($data['name']);
@@ -121,13 +127,53 @@ class UserController extends Controller{
                 $user->setMail($data['mail']);
                 $em->merge($user);
                 $em->flush();
+
+                $profileUpdate = true;
+            }
+        }
+
+        // Traitement du formulaire pour changer le profil
+        if($request->request->has('changeProfile')){
+
+            $formChangeProfile->handleRequest($request);
+
+            if ($formChangeProfile->isValid()) {
+
+                // On récupère les data du formulaire
+                $data = $request->request->get('changeProfile');
+
+                if(!empty($data['isPrivate'])) {
+                    if($user->getIsPrivate()) {
+                        $user->setIsPrivate(0);
+                    }
+                    else {
+                        $user->setIsPrivate(1);
+                    }
+                }
+
+                $em->merge($user);
+                $em->flush();
+
+                $profileUpdate = true;
             }
         }
 
         return $this->render('AppBundle:User:profil.html.twig', array(
             'formChangePassword' => $formChangePassword->createView(),
             'formChangePersonalData' => $formChangePersonalData->createView(),
+            'formChangeProfil' => $formChangeProfile->createView(),
+            'profileUpdate' => $profileUpdate,
+            'profileState' => $user->getIsPrivate(),
         ));
+    }
+
+    public function deleteAction(){
+
+        $user = $this->get('appbundle.repository.user')->loadUserByUsername($this->getUser()->getUsername());
+
+        $this->get('appbundle.repository.user')->delete($user);
+
+        return $this->redirect($this->generateUrl('logout'));
     }
 
     public function timelineAction()
