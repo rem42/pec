@@ -40,6 +40,10 @@
         <default key="_controller">AppBundle:User:timeline</default>
     </route>
 
+    <route id="user_delete" path="/utilisateur/delete/account">
+        <default key="_controller">AppBundle:User:delete</default>
+    </route>
+
     <route id="profil_public" path="/profil/public/{id}">
         <default key="_controller">AppBundle:User:profilePublic</default>
         <option key="expose">true</option>

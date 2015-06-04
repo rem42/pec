@@ -17,6 +17,7 @@ class User implements UserInterface{
     protected $salt = "";
     protected $token;
     protected $isActivated;
+    protected $isPrivate;
     protected $createdAt;
     protected $updatedAt;
 
@@ -32,6 +33,7 @@ class User implements UserInterface{
         $this->skillsUser = new ArrayCollection();
         $this->token = uniqid("", true);
         $this->isActivated = false;
+        $this->isPrivate = false;
     }
 
     public function getId()
@@ -173,6 +175,22 @@ class User implements UserInterface{
     public function setToken($token)
     {
         $this->token = $token;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsPrivate()
+    {
+        return $this->isPrivate;
+    }
+
+    /**
+     * @param boolean $isPrivate
+     */
+    public function setIsPrivate($isPrivate)
+    {
+        $this->isPrivate = $isPrivate;
     }
 
     /**
