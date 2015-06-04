@@ -12,30 +12,31 @@ class LoadSkillData extends AbstractFixture implements FixtureInterface, Ordered
     public function load(ObjectManager $manager){
         $arraySkill = [
             'informatique' => [
-                'C++',
-                'C',
-                'JAVA',
-                'ANDROID',
-                'JEE',
-                'PHP',
-                'POO',
-                'Symfony',
-                'HTML',
-                'CSS',
-                'HTML5',
-                'CSS3',
+                'C++' => 'png',
+                'C' => 'png',
+                'JAVA' => 'jpg',
+                'ANDROID' => 'png',
+                'JEE' => 'png',
+                'PHP' => 'png',
+                'POO' => 'jpg',
+                'Symfony' => 'png',
+                'HTML' => 'png',
+                'CSS' => 'png',
+                'HTML5' => 'png',
+                'CSS3' => 'png',
             ],
             'expression' => [
-                'Communication',
-                'Anglais',
-                'Espagnol'
+                'Communication' => 'png',
+                'Anglais' => 'png',
+                'Espagnol' => 'png',
             ]
         ];
 
         foreach ($arraySkill as $a => $b) {
-            foreach ($b as $c) {
+            foreach ($b as $c => $d) {
                 $skill = new Skill();
                 $skill->setName($c);
+                $skill->setPath($d);
                 $skill->setSkillCategory($this->getReference('skill-category-' . $a));
                 $manager->persist($skill);
                 $manager->flush();

@@ -141,7 +141,7 @@ class Skill {
 
     public function getWebPath()
     {
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+        return null === $this->path ? null : '/'.$this->getUploadDir().'/'.$this->id.'.'.$this->path;
     }
 
     protected function getUploadRootDir()
