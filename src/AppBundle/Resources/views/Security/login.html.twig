@@ -3,6 +3,15 @@
 {% block body %}
 
 
+    <div id="succes-mail-send-lost-password" style="display: none" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p>Un nouveau email vient de vous être envoyer, vous pourrez définir un nouveau mot de passe</p>
+    </div>
+
+    <div id="error-mail-send-lost-password" style="display: none" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p>L'adresse que vous avez renseigné n'est associé à aucun compte</p>
+    </div>
 
     {% if validation_account is defined %}
         {% if validation_account %}
@@ -32,6 +41,15 @@
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Votre compte a été créé, un mail de validation vient de vous être envoyé.
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if new_password_defined is defined %}
+        {% if new_password_defined %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Votre nouveau mot de passe a bien été défini, vous pouvez maintenant vous connecter
             </div>
         {% endif %}
     {% endif %}
@@ -247,11 +265,13 @@
                     data: {email : email},
                     success : function(response)
                     {
-                        if(response) {
-                            alert('ok');
+                        if(response == 1) {
+                            $("#lostpassword").hide();
+                            $("#succes-mail-send-lost-password").show();
                         }
                         else {
-                            alert('erreur');
+                            $("#lostpassword").hide();
+                            $("#error-mail-send-lost-password").show();
                         }
                     }
                 });
