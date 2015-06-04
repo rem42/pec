@@ -300,8 +300,6 @@ class UserController extends Controller{
         }
 
         return new Response(1);
-
-        //return $this->redirect($this->generateUrl('login'));
     }
 
     public function newPasswordAction(Request $request, $token){
@@ -310,13 +308,12 @@ class UserController extends Controller{
 
         $user = $this->get('appbundle.repository.user')->loadUserByToken($token);
 
-        $formChangePassword = $this->createForm(new ChangePasswordType());
-
         if($user) {
 
-            if($request->request->has('changePassword')){
+            $formChangePassword = $this->createForm(new ChangePasswordType());
+            $formChangePassword->handleRequest($request);
 
-                $formChangePassword->handleRequest($request);
+            if ($formChangePassword->isValid()) {
 
                 if ($formChangePassword->isValid()) {
 
@@ -327,17 +324,21 @@ class UserController extends Controller{
                     $encoder = $factory->getEncoder($user);
                     $password = $encoder->encodePassword($password['password']['first'], $user->getSalt());
                     $user->setPassword($password);
+                    $user->setToken(null);
 
                     $em->merge($user);
                     $em->flush();
                 }
+                return $this->render('AppBundle:Security:login.html.twig', array(
+                    'new_password_defined' => true,
+                ));
             }
+            return $this->render('AppBundle:User:newPassword.html.twig', array(
+                'formChangePassword' => $formChangePassword->createView(),
+            ));
         }
         else {
-
-            return $this->render('AppBundle:Security:login.html.twig', array(
-                'validation_account' => false
-            ));
+            return $this->redirect($this->generateUrl('login'));
         }
     }
 }
