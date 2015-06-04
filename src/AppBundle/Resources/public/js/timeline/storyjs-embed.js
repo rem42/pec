@@ -256,7 +256,7 @@ function createStoryJS(c, src) {
             base: embed_path,
             css: embed_path + "css/timeline/",
             js: embed_path + "js/timeline/",
-            locale: embed_path + "js/locale/",
+            locale: embed_path + "js/timeline/locale/",
             jquery: "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js",
             font: {
                 google: false,

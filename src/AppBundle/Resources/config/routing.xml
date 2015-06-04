@@ -54,6 +54,10 @@
         <option key="expose">true</option>
     </route>
 
+    <route id="profil_public_info" path="/profil/public/info/{id}">
+        <default key="_controller">AppBundle:UserSkillValidation:info</default>
+    </route>
+
     <route id="public_validation" path="/public/validation/{token}">
         <default key="_controller">AppBundle:User:validation</default>
     </route>

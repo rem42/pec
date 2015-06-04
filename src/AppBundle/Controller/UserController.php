@@ -178,7 +178,7 @@ class UserController extends Controller{
 
     public function timelineAction()
     {
-        $userSkills = $this->get('appbundle.repository.skilluser')->findByUserForTimeline($this->getUser());
+        $userSkills = $this->get('appbundle.repository.skilluser')->findByUserForTimeline($this->getUser(), $this->getUser());
 
         $skills = array();
         foreach ($userSkills as $us) {
@@ -207,16 +207,28 @@ class UserController extends Controller{
     public function profilePublicAction($id)
     {
         $user = $this->get('appbundle.repository.user')->loadUserById($id);
-        $userSkills = $this->get('appbundle.repository.skilluser')->findByUserForTimeline($user);
-
+        $userSkills = $this->get('appbundle.repository.skilluser')->findByUserForTimeline($user, $this->getUser());
         $skills = array();
         foreach ($userSkills as $us) {
             $text = "";
             if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))){
                 if(method_exists($this->getUser(), 'getId') && $user->getId() != $this->getUser()->getId()) {
-                    $text .= ' <input type="button" class="validUser btn btn-default" data-url="' . $this->generateUrl('userValidation', array("id" => $us["su_id"])) . '" value="+1" /> <span class="badge">'.$us["vote"].'</span>';
+                    if(isset($us["id"]) && $us["id"]>0){
+                        $text .= ' <input
+                    type="button"
+                    class="validUser btn btn-success checked"
+                    data-url="' . $this->generateUrl('userValidation', array("id" => $us["su_id"])) . '"
+                    value="+1" /> <img id="loading" src="'.$this->container->get('templating.helper.assets')->getUrl('bundles/app/css/timeline/loading.gif').'" />';
+                    }else{
+                        $text .= ' <input
+                    type="button"
+                    class="validUser btn btn-info"
+                    data-url="' . $this->generateUrl('userValidation', array("id" => $us["su_id"])) . '"
+                    value="+1" /> <img id="loading" src="'.$this->container->get('templating.helper.assets')->getUrl('bundles/app/css/timeline/loading.gif').'" />';
+                    }
                 }
             }
+            $text .= '<span class="badge" data-url="'.$this->generateUrl('profil_public_info', array("id" => $us["su_id"])).'">'.$us["vote"].'</span>';
             $skills[] = [
                 'startDate' => $us["su_dateStart"]->format('m/d/Y'),
                 'endDate' => $us["su_dateEnd"]->format('m/d/Y'),
@@ -234,7 +246,8 @@ class UserController extends Controller{
         ];
 
         return $this->render('AppBundle:User:profilePublic.html.twig', array(
-            'timeLine' => $timeLine
+            'timeLine' => $timeLine,
+            'user' => $user
         ));
     }
 

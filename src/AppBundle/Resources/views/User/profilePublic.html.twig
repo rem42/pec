@@ -6,6 +6,21 @@
                 padding: 0px;
                 margin: 0px;
             }
+	        #loading{
+		        display: none;
+		        border: none;
+	        }
+	        .badge{
+		        cursor: pointer;
+	        }
+	        h1{
+		        margin-top: 90px;
+		        text-align: center;
+	        }
+	        small{
+		        text-align: center;
+		        display: block;
+	        }
         </style>
     {% endblock %}
     {% block js %}
@@ -17,19 +32,72 @@
 
 {% block body %}
 
-    <h1>Timeline</h1>
+    <h1>Timeline de {{ user.name }} {{ user.surname }}</h1>
+	<small>{{ user.mail }}</small>
     <div id="timeline-embed"></div>
+
+
+	<div id="person" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Personnes qui ont validé la compétence</h4>
+				</div>
+				<div class="modal-body">
+					<ul id="personlist"></ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
 
     <script type="text/javascript">
 	    var timeline_config = {
 		    width: "100%",
 		    height: "550",
 		    debug: true,
+		    lang: 'fr',
 		    source: {{ timeLine|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
 	    };
 	    function ajoutEvent(){
 		    $('.validUser').unbind('click').click(function(){
 			    var input = $(this);
+			    $(input).next().fadeIn();
+			    $.ajax({
+				    type: "GET",
+				    url: $(this).data('url'),
+				    dataType: "json",
+				    success : function(response)
+				    {
+					    if(response.status){
+						    $(input).addClass('btn-success').addClass('checked').removeClass('btn-info').val('+1');
+						    $(input).next().fadeOut();
+						    $(input).next().next().text(response.count);
+						    changeHover();
+					    }else{
+						    $(input).addClass('btn-info').removeClass('btn-success').removeClass('btn-danger').removeClass('checked').val('+1');
+						    $(input).next().fadeOut();
+						    $(input).next().next().text(response.count);
+						    $(input).unbind('mouseenter mouseleave');
+						    changeHover();
+					    }
+				    }
+			    });
+		    });
+		    $('.badge').unbind('click').click(function(){
+			    var input = $(this);
+			    $(input).next().fadeIn();
 			    $.ajax({
 				    type: "GET",
 				    url: $(this).data('url'),
@@ -37,14 +105,30 @@
 				    success : function(response)
 				    {
 					    if(response){
-						    console.log($(this));
-							$(this).content('poney');
+						    var persons = response.person;
+						    $("#personlist").empty();
+						    var personlist = document.getElementById("personlist");
+
+						    persons.forEach(function (person) {
+							    var li = document.createElement("li");
+
+							    li.textContent = person;
+							    personlist.appendChild(li);
+						    });
+						    $('#person').modal('show');
 					    }else{
-						    alert('Vous ne pouvez pas valider plusieurs fois');
+						    console.log(response);
 					    }
 				    }
 			    });
-			    $(this).html('coucou');
+		    });
+		    changeHover();
+	    }
+	    function changeHover(){
+		    $('.validUser.checked').unbind('mouseenter mouseleave').hover(function(){
+			    $(this).addClass('btn-danger').removeClass('btn-success').val('-1');
+		    }, function(){
+			    $(this).removeClass('btn-danger').addClass('btn-success').val('+1');
 		    });
 	    }
     </script>

@@ -19,7 +19,7 @@
         </one-to-many>
 
         <many-to-one field="skill" target-entity="Skill" inversed-by="skillsUser">
-            <join-column name="skill_id"></join-column>
+            <join-column name="skill_id" />
         </many-to-one>
 
         <many-to-one field="user" target-entity="User" inversed-by="skillsUser" >

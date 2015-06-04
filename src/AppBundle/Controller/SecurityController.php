@@ -19,7 +19,7 @@ class SecurityController extends Controller {
             if(!$this->getUser()->getIsActivated()) {
                 return $this->redirect($this->generateUrl('logout'));
             }
-            return $this->redirect($this->generateUrl('timeline'));
+            return $this->redirect($this->generateUrl('userSkills'));
         }
 
         //$form = $this->createForm(new UserLoginType());
