@@ -2,8 +2,8 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Skill;
 use AppBundle\Entity\SkillUser;
+use AppBundle\Entity\SkillCategory;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 
@@ -40,7 +40,9 @@ class SkillUserRepository{
 
     public function findByUserForTimeline(User $user){
         return $this->entityManager->createQuery(
-            'SELECT su, s, sc
+            'SELECT su, s, sc, (
+                SELECT COUNT(usv) FROM AppBundle:UserSkillValidation usv WHERE usv.userSkill = su.id
+            ) as vote
             FROM AppBundle:SkillUser su
             LEFT JOIN AppBundle:Skill s WITH su.skill = s.id
             LEFT JOIN AppBundle:SkillCategory sc WITH s.skillCategory = sc.id
@@ -57,5 +59,16 @@ class SkillUserRepository{
     public function delete(SkillUser $skillUser){
         $this->entityManager->remove($skillUser);
         $this->entityManager->flush();
+    }
+
+    public function findByCategory(User $user){
+        return $this->entityManager->createQuery(
+            'SELECT sc, s, su
+            FROM AppBundle:SkillCategory sc
+            JOIN AppBundle:Skill s WITH s.skillCategory = sc.id
+            JOIN AppBundle:SkillUser su WITH su.skill = s.id
+            WHERE su.user = :user_id
+            ')
+            ->setParameter(':user_id', $user->getId())->getScalarResult();
     }
 }

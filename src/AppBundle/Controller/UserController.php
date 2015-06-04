@@ -43,13 +43,13 @@ class UserController extends Controller{
                 ));
             }
 
-            //$message = \Swift_Message::newInstance()
-            //    ->setSubject('Hello Email')
-            //    ->setFrom('moi@moi.fr')
-            //    ->setTo($user->getMail())
-            //    ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_validation', array('token' => $user->getToken())))
-            //;
-            //$this->get('mailer')->send($message);
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Hello Email')
+                ->setFrom('moi@moi.fr')
+                ->setTo($user->getMail())
+                ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_validation', array('token' => $user->getToken()), true))
+            ;
+            $this->get('mailer')->send($message);
 
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($user);
@@ -211,17 +211,17 @@ class UserController extends Controller{
 
         $skills = array();
         foreach ($userSkills as $us) {
-            $text = $us["s_name"];
+            $text = "";
             if($this->container->get('security.context')->isGranted(array('ROLE_ADMIN', 'ROLE_USER'))){
                 if(method_exists($this->getUser(), 'getId') && $user->getId() != $this->getUser()->getId()) {
-                    $text .= ' <input type="button" class="validUser btn btn-default" data-url="' . $this->generateUrl('userValidation', array("id" => $us["su_id"])) . '" value="Valider cette compétence" />';
+                    $text .= ' <input type="button" class="validUser btn btn-default" data-url="' . $this->generateUrl('userValidation', array("id" => $us["su_id"])) . '" value="+1" /> <span class="badge">'.$us["vote"].'</span>';
                 }
             }
             $skills[] = [
                 'startDate' => $us["su_dateStart"]->format('m/d/Y'),
                 'endDate' => $us["su_dateEnd"]->format('m/d/Y'),
-                'headline' => $us["sc_name"],
-                'text' => $text
+                'text' => $us["sc_name"].$text,
+                'headline' => $us["s_name"]
             ];
         }
         $timeLine = [

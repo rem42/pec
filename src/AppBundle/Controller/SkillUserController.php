@@ -2,11 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Skill;
+use AppBundle\Entity\SkillCategory;
 use AppBundle\Entity\SkillUser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\SkillUserAddType;
+use Ps\PdfBundle\Annotation\Pdf;
 
 
 class SkillUserController extends Controller{
@@ -70,5 +73,25 @@ class SkillUserController extends Controller{
             return $this->redirect($this->generateUrl('userSkills'));
         }
 
+    }
+
+    /**
+     * @Pdf()
+     */
+    public function exportAction()
+    {
+        //$format = $this->get('request')->get('_format');
+        $user = $this->get('appbundle.repository.user')->loadUserByUsername($this->getUser()->getUsername());
+
+        //$userSkills = $this->get('appbundle.repository.skilluser')->findByUser($this->getUser());
+
+        $userSkillsCategories = $this->get('appbundle.repository.skilluser')->findByCategory($user);
+
+        //d($userSkillsCategories);
+
+        return $this->render('@App/export.pdf.twig', array(
+            'user' => $user,
+            'userSkillsCategories' => $userSkillsCategories
+        ));
     }
 }

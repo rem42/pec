@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf SYSTEM "%resources%/dtd/doctype.dtd">
+<pdf>
+    <dynamic-page>
+        <div>
+            <p><h1>Liste des compétences de {{ user.name }} {{ user.surname }}</h1></p>
+
+            <ul>
+                {% set previous_cat = '' %}
+                {% for userSkillCategory in userSkillsCategories %}
+                    {% if previous_cat != userSkillCategory.sc_name %}
+                        {% set previous_cat = userSkillCategory.sc_name %}
+                        <li><p>{{ userSkillCategory.sc_name }}</p></li>
+                    {% endif %}
+                    <p>{{ userSkillCategory.s_name }}</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </dynamic-page>
+</pdf>
