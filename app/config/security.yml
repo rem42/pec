@@ -25,8 +25,8 @@ security:
         in_memory:
             memory:
                 users:
-                    user:  { password: user, roles: 'ROLE_USER' }
-                    admin: { password: adminadmin, roles: 'ROLE_ADMIN' }
+                    #user:  { password: user, roles: 'ROLE_USER' }
+                    #admin: { password: adminadmin, roles: 'ROLE_ADMIN' }
         user_repository:
             id: appbundle.repository.user
 

@@ -47,14 +47,16 @@
                     <p>{{ app.user.mail }}</p>
                 </div>
 
-                <div class="group">
-                    <label>Visibilité du profil</label>
-                    {% if profileState %}
-                        <p>Votre profil est actuellement privée</p>
-                    {% else %}
-                        <p>Votre profil est actuellement public</p>
-                    {% endif %}
-                </div>
+                {% if not is_granted('ROLE_USER') %}
+                    <div class="group">
+                        <label>Visibilité du profil</label>
+                        {% if profileState %}
+                            <p>Votre profil est actuellement privée</p>
+                        {% else %}
+                            <p>Votre profil est actuellement public</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
 
             </div>
 
@@ -72,9 +74,11 @@
 
             <div role="tabpanel" class="tab-pane" id="parametres">
 
-                <h2>Gestion profil</h2>
+                {% if not is_granted('ROLE_USER') %}
+                    <h2>Gestion profil</h2>
 
-                {{ form(formChangeProfil) }}
+                    {{ form(formChangeProfil) }}
+                {% endif %}
 
                 <h2>Gestion compte</h2>
 

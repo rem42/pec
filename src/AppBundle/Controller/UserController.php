@@ -34,6 +34,7 @@ class UserController extends Controller{
             if (preg_match('/etu.univ-lyon1/', $user->getMail()) || preg_match('/univ-lyon1/', $user->getMail())) {
                 if(!preg_match('/etu.univ-lyon1/', $user->getMail())) {
                     $user->setRoles(['ROLE_ADMIN']);
+                    $user->setIsPrivate(true);
                 }
             }
             else {
