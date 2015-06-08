@@ -2,8 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Skill;
 use AppBundle\Entity\SkillUser;
-use AppBundle\Entity\SkillCategory;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 
