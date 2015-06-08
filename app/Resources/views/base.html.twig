@@ -34,6 +34,75 @@
 		}
 	</style>
 
+
+	<style>
+		#home{
+			margin-top: 100px;
+		}
+		#home .form {
+			width: 100%;
+			margin-bottom: 2%;
+			color: white;
+		}
+
+		#home .segment1 {
+			background-color: #8BC34A;
+			min-height: 470px;
+			padding-top: 9%;
+		}
+
+		#home .seg{
+			margin-top: 2%;
+			width: 100%;
+			height: 100%;
+			padding-left: 2%;
+			padding-right: 2%;
+			text-shadow: 0 1px 3px #222;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
+		}
+
+		#home .segment2 {
+			background-color: #FF9800;
+			min-height: 600px;
+			padding-top: 7%;
+			padding-bottom: 7%;
+			margin-top: 2%;
+			text-align: center;
+			color: #ffffff;
+		}
+
+		#home .subSegement{
+			padding-top: 7%;
+			padding-bottom: 7%;
+			padding-left: 2%;
+			padding-right: 2%;
+		}
+
+		footer{
+			background-color: #FFFFFF;
+			width: 100%;
+			height: 100%;
+			min-height: 100px;
+			padding-top:2%;
+			padding-left: 2%;
+			padding-right: 2%;
+			margin-top: 2%;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
+			text-align: center;
+			color: #ffffff;
+			text-shadow: 0 1px 3px #222;
+		}
+
+
+		#home .text {
+			color: #ffffff;
+		}
+
+		#login span.glyphicon {
+			font-size: 5em;
+		}
+	</style>
+
 	{% block stylesheets %}{% endblock %}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -88,9 +157,12 @@
     </div>
 
 
-    <div class="content" style="margin-top: 60px;">
+    <div class="content" style="margin-top: 60px;min-height: 100%;
+min-width: 100%;">
         {% block body %}{% endblock %}
+	    <div class="clearfix"></div>
     </div>
+	<footer>Copyright © 2015 Tous droits réservés.</footer>
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>

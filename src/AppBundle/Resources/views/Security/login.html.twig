@@ -72,73 +72,6 @@
 	    {% endif %}
     {% endif %}
 
-	<style>
-		#home{
-			margin-top: 100px;
-		}
-		#home .form {
-			width: 100%;
-			margin-bottom: 2%;
-			color: white;
-		}
-
-		#home .segment1 {
-			background-color: #8BC34A;
-			min-height: 470px;
-			padding-top: 9%;
-		}
-
-		#home .seg{
-			margin-top: 2%;
-			width: 100%;
-			height: 100%;
-			padding-left: 2%;
-			padding-right: 2%;
-			text-shadow: 0 1px 3px #222;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
-		}
-
-		#home .segment2 {
-			background-color: #FF9800;
-			min-height: 600px;
-			padding-top: 7%;
-			padding-bottom: 7%;
-			margin-top: 2%;
-			text-align: center;
-			color: #ffffff;
-		}
-
-		#home .subSegement{
-			padding-top: 7%;
-			padding-bottom: 7%;
-			padding-left: 2%;
-			padding-right: 2%;
-		}
-
-		#home .footer{
-			background-color: #FFFFFF;
-			width: 100%;
-			height: 100%;
-			min-height: 100px;
-			padding-top:2%;
-			padding-left: 2%;
-			padding-right: 2%;
-			margin-top: 2%;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
-			text-align: center;
-			color: #ffffff;
-			text-shadow: 0 1px 3px #222;
-		}
-
-
-		#home .text {
-			color: #ffffff;
-		}
-
-		span.glyphicon {
-			font-size: 5em;
-		}
-	</style>
 	<div id="home">
 		<div class="seg segment1">
 			<div class="col-md-8 text">
@@ -153,7 +86,7 @@
 
 
 			<div class="col-md-4">
-				<form action="{{ path('login_check') }}" method="post">
+				<form action="{{ path('login_check') }}" method="post" id="login">
 
 					<div class="input-group input-group-lg form">
 						<span class="input-group-addon glyphicon glyphicon-user" id="sizing-addon1"></span>
@@ -208,10 +141,6 @@
 			<p>Placer le contenu ici. </p>
 
 		</div>-->
-
-
-		<div class="footer">
-		</div>
 
         <!-- Modal -->
         <div class="modal fade" id="lostpassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
