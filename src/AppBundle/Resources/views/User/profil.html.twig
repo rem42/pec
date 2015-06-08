@@ -47,7 +47,7 @@
                     <p>{{ app.user.mail }}</p>
                 </div>
 
-                {% if not is_granted('ROLE_USER') %}
+                {% if not is_granted('ROLE_ADMIN') %}
                     <div class="group">
                         <label>Visibilité du profil</label>
                         {% if profileState %}
@@ -74,7 +74,7 @@
 
             <div role="tabpanel" class="tab-pane" id="parametres">
 
-                {% if not is_granted('ROLE_USER') %}
+                {% if not is_granted('ROLE_ADMIN') %}
                     <h2>Gestion profil</h2>
 
                     {{ form(formChangeProfil) }}
