@@ -1,8 +1,13 @@
 {% extends "::base.html.twig" %}
-
+{% block title %}PEC - Édition de compétences{% endblock %}
 {% block body %}
 
-	{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-	{{ form(form) }}
+	<div class="row-fluid">
+		<div class="col-md-8 col-md-offset-2">
+			<h2>Modifier une compétence</h2>
+			{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+			{{ form(form) }}
+		</div>
+	</div>
 
 {% endblock %}

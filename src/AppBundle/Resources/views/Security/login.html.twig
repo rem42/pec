@@ -1,5 +1,5 @@
 {% extends "::base.html.twig" %}
-
+{% block title %}PEC - Connexion{% endblock %}
 {% block body %}
 
 
@@ -73,63 +73,49 @@
     {% endif %}
 
 	<style>
-		.form {
+		#home{
+			margin-top: 100px;
+		}
+		#home .form {
 			width: 100%;
 			margin-bottom: 2%;
 			color: white;
 		}
 
-		.segment1 {
+		#home .segment1 {
 			background-color: #8BC34A;
+			min-height: 470px;
+			padding-top: 9%;
+		}
+
+		#home .seg{
 			margin-top: 2%;
 			width: 100%;
 			height: 100%;
-			min-height: 470px;
-			padding-top: 9%;
 			padding-left: 2%;
 			padding-right: 2%;
-			text-shadow: 0 1px 3px #222;	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
+			text-shadow: 0 1px 3px #222;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
 		}
 
-		.segment2 {
+		#home .segment2 {
 			background-color: #FF9800;
-			width: 100%;
-			height: 100%;
 			min-height: 600px;
 			padding-top: 7%;
 			padding-bottom: 7%;
-			padding-left: 2%;
-			padding-right: 2%;
 			margin-top: 2%;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
 			text-align: center;
 			color: #ffffff;
-			text-shadow: 0 1px 3px #222;
 		}
 
-		.subSegement{
+		#home .subSegement{
 			padding-top: 7%;
 			padding-bottom: 7%;
 			padding-left: 2%;
 			padding-right: 2%;
 		}
 
-		.segment3 {
-			background-color: #2196F3;
-			width: 100%;
-			height: 100%;
-			min-height: 470px;
-			padding-top: 10%;
-			padding-left: 2%;
-			padding-right: 2%;
-			margin-top: 2%;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.24);
-			text-align: center;
-			color: #ffffff;
-			text-shadow: 0 1px 3px #222;
-		}
-
-		.footer{
+		#home .footer{
 			background-color: #FFFFFF;
 			width: 100%;
 			height: 100%;
@@ -145,7 +131,7 @@
 		}
 
 
-		.text {
+		#home .text {
 			color: #ffffff;
 		}
 
@@ -153,8 +139,8 @@
 			font-size: 5em;
 		}
 	</style>
-	<div class="container-fluid">
-		<div class="segment1">
+	<div id="home">
+		<div class="seg segment1">
 			<div class="col-md-8 text">
 
 				<h1>Portefeuille électronique des compétences.</h1>
@@ -191,7 +177,7 @@
 			</div>
 
 		</div>
-		<div class="segment2">
+		<div class="seg segment2">
 			<div class="col-md-12">
 
 				<h1>Vous allez adorer PEC.
@@ -216,12 +202,12 @@
 
 		</div>
 
-		<div class="segment3">
+		<!--<div class="segment3">
 			<h2>Placer le contenu ici.</h2>
 
 			<p>Placer le contenu ici. </p>
 
-		</div>
+		</div>-->
 
 
 		<div class="footer">

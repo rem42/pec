@@ -17,6 +17,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
         $user->setSurname('BRUYERE');
         $user->setUsername('rem42');
         $user->setPassword('LhTmnctizH3sjjSmIJ+uzkiLqRUMmVTWnud7idjuzDnDtx5ub7N9LmLKMJFDZiYRZfzaVsu6Y/XcXaGFwhgBSQ==');
+        $user->setIsActivated(true);
         $manager->persist($user);
         $manager->flush();
         $this->addReference('user-rem42', $user);
@@ -39,6 +40,8 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
         $user->setSurname('Veysset');
         $user->setUsername('Vincent');
         $user->setPassword('hg6SR5HAv9efHtp5q2pT7DzRnG2x6Rk1AykrtJiblJS/eyCnGDJzG/QDSuYc3rPEK94FaUBen8A+7/rTpSBxzA==');
+        $user->setIsActivated(true);
+        $user->setIsPrivate(true);
         $manager->persist($user);
         $manager->flush();
         $this->addReference('user-vincent', $user);
@@ -50,9 +53,23 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
         $user->setSurname('Berthod');
         $user->setUsername('Berthod.Billy');
         $user->setPassword('LbInuPGtIZgPql8wKpFmqeZM4R1XA46EEWzgtKcZ05dG//wtT3/jv9yr/cjfv3XCI+YeUkq2oGGfOZr/rK44Ng==');
+        $user->setIsActivated(true);
         $manager->persist($user);
         $manager->flush();
         $this->addReference('user-billy', $user);
+
+
+        $user = new User();
+        $user->setMail("admin@admin.admin");
+        $user->setName('admin');
+        $user->setSurname('admin');
+        $user->setUsername('admin');
+        $user->setPassword('v+c8k9Kwz6SH6vrd2EV5srTkpBkH1MJxkHpwYO8FWWP1w03yTOPAsSBcNDDgdbJhY3PrBZF6CyxfBl330aFk6w==');
+        $user->setIsActivated(true);
+        $user->setRoles(['ROLE_ADMIN']);
+        $manager->persist($user);
+        $manager->flush();
+        $this->addReference('user-admin', $user);
     }
 
     public function getOrder(){

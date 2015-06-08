@@ -9,13 +9,23 @@ class SkillAddType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text')
-            ->add('skillCategory', 'entity', array(
+        $builder->add('name', 'text', [
+                'label'=>'Nom'
+            ])
+            ->add('skillCategory', 'entity', [
                 'class' => 'AppBundle\Entity\SkillCategory',
                 'property' => 'name',
-            ))
-            ->add('file', 'file')
-            ->add('send', 'submit');
+                'label' => 'Catégorie'
+            ])
+            ->add('file', 'file', [
+                'label'=>'Image'
+            ])
+            ->add('send', 'submit', [
+                'label'=>'Ajouter',
+                'attr' => [
+                    'class' => 'btn-success'
+                ]
+            ]);
     }
     public function getName()
     {

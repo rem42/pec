@@ -11,10 +11,10 @@ class ChangeProfileType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('isPrivate', 'checkbox', array(
+        $builder->add('isPrivate', 'checkbox', [
             'label' => " Changer la visibilité de mon profil",
             'required' => false,
-        ))
+        ])
             ->add('Modifier mon profil', 'submit')
         ;
     }

@@ -1,5 +1,5 @@
 {% extends "::base.html.twig" %}
-
+{% block title %}PEC - Mon profil{% endblock %}
 {% block body %}
 <div class="container">
 
@@ -38,12 +38,12 @@
                 </div>
 
                 <div class="group">
-                    <label>Username</label>
+                    <label>Pseudo</label>
                     <p>{{ app.user.username }}</p>
                 </div>
 
                 <div class="group">
-                    <label>Email</label>
+                    <label>E-mail</label>
                     <p>{{ app.user.mail }}</p>
                 </div>
 
