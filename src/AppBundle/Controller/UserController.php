@@ -178,37 +178,13 @@ class UserController extends Controller{
         return $this->redirect($this->generateUrl('logout'));
     }
 
-    public function timelineAction()
+    public function profilePublicAction(Request $request)
     {
-        $userSkills = $this->get('appbundle.repository.skilluser')->findByUserForTimeline($this->getUser(), $this->getUser());
-
-        $skills = array();
-        foreach ($userSkills as $us) {
-            $skills[] = [
-                'startDate' => $us["su_dateStart"]->format('d/m/Y h:i:s'),
-                'endDate' => $us["su_dateEnd"]->format('d/m/Y h:i:s'),
-                'headline' => $us["sc_name"],
-                'text' => $us["s_name"].' <a href="" >Valider cette compétence</a>'
-            ];
+        if($request->get('id')){
+            $user = $this->get('appbundle.repository.user')->loadUserById($request->get('id'));
+        }else{
+            $user = $this->get('appbundle.repository.user')->loadUserById($this->getUser()->getId());
         }
-        $timeLine = [
-            'timeline' => [
-                'headline' => "Cahier des compétences",
-                'type' => "default",
-                'startDate' => '2010',
-                'date' => $skills
-            ]
-        ];
-
-
-        return $this->render('AppBundle:User:timeline.html.twig', array(
-            'timeLine' => ($timeLine)
-        ));
-    }
-
-    public function profilePublicAction($id)
-    {
-        $user = $this->get('appbundle.repository.user')->loadUserById($id);
 
         if($user->getIsPrivate()) {
             return $this->redirect($this->generateUrl('login'));

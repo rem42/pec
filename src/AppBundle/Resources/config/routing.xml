@@ -42,7 +42,7 @@
     </route>
 
     <route id="timeline" path="/utilisateur/timeline">
-        <default key="_controller">AppBundle:User:timeline</default>
+        <default key="_controller">AppBundle:User:profilePublic</default>
     </route>
 
     <route id="user_delete" path="/utilisateur/delete/account">
