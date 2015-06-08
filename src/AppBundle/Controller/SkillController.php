@@ -17,9 +17,10 @@ class SkillController extends Controller{
         $form->handleRequest($request);
         $error = false;
 
+
         if ($form->isValid()) {
             $this->get('appbundle.repository.skill')->save($skill);
-        }else{
+        }elseif($form->isSubmitted()){
             $error = true;
         }
 
