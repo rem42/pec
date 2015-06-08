@@ -9,18 +9,23 @@ class UserRegisterType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text', array('label' => 'Prénom'))
-            ->add('surname', 'text', array('label' => 'Nom'))
-            ->add('username', 'text', array('label' => 'Pseudo'))
-            ->add('mail', 'email', array('label' => 'Email (celui de Lyon 1)'))
-            ->add('password', 'repeated', array(
+        $builder->add('name', 'text', ['label' => 'Prénom'])
+            ->add('surname', 'text', ['label' => 'Nom'])
+            ->add('username', 'text', ['label' => 'Pseudo'])
+            ->add('mail', 'email', ['label' => 'Email (celui de Lyon 1)'])
+            ->add('password', 'repeated', [
                 'type' => 'password',
                 'invalid_message' => 'Les mots de passe doivent correspondre',
-                'options' => array('required' => true),
-                'first_options'  => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Mot de passe (validation)'),
-            ))
-            ->add('send', 'submit', array('label' => "S'enregistrer",  'attr' => array('class'=>' btn btn-success btn-lg btn-block form')));
+                'options' => ['required' => true],
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Mot de passe (validation)'],
+            ])
+            ->add('send', 'submit', [
+                'label' => "S'enregistrer",
+                'attr' => [
+                    'class'=>' btn btn-success btn-lg btn-block form'
+                ]
+            ]);
     }
     public function getName()
     {

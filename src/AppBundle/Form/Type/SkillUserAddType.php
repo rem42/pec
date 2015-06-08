@@ -12,14 +12,14 @@ class SkillUserAddType extends AbstractType{
         $builder
             ->add('dateStart', 'date')
             ->add('dateEnd', 'date')
-            ->add('skill', 'entity', array(
+            ->add('skill', 'entity', [
                 'class' => 'AppBundle\Entity\Skill',
                 'group_by' => 'skillCategory',
                 'property' => 'name',
-                'attr' => array(
+                'attr' => [
                     'class' => 'col-md-5'
-                )
-            ))
+                ]
+            ])
             ->add('send', 'submit');
     }
     public function getName()
