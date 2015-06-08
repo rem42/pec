@@ -118,9 +118,9 @@
                        text += ("<p><a href=" + Routing.generate('profil_public', { id: response[i].id }) + ">" + response[i].name + " " + response[i].surname + "<small> (" + response[i].mail + ")</small>" + "</a></p>");
                     });
 
-                    $("#searchResults").html(text).show();
-                    //console.log(response);
-
+	                if(text.length > 0) {
+		                $("#searchResults").html(text).show();
+	                }
                 }
             });
         }
