@@ -1,41 +1,43 @@
 {% extends "::base.html.twig" %}
 	{% block stylesheets %}
-        <style>
-            html, body {
-                height:100%;
-                padding: 0px;
-                margin: 0px;
-            }
-	        #loading{
-		        display: none;
-		        border: none;
-	        }
-	        .badge{
-		        cursor: pointer;
-	        }
-	        h1{
-		        margin-top: 90px;
-		        text-align: center;
-	        }
-	        small{
-		        text-align: center;
-		        display: block;
-	        }
-        </style>
-    {% endblock %}
+		<style>
+			html, body {
+				height:100%;
+				padding: 0px;
+				margin: 0px;
+			}
+			#loading{
+				display: none;
+				border: none;
+			}
+			.badge{
+				cursor: pointer;
+			}
+			#haut-timeline{
+				margin-top: 90px;
+				text-align: center;
+			}
+			#haut-timeline small{
+				display: block;
+			}
+		</style>
+	{% endblock %}
     {% block js %}
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-touch-fullscreen" content="yes">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	    <meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-touch-fullscreen" content="yes">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     {% endblock %}
 
 
 {% block body %}
 
-    <h1>Timeline de {{ user.name }} {{ user.surname }}</h1>
-	<small>{{ user.mail }}</small>
-    <div id="timeline-embed"></div>
+	<div id="haut-timeline" >
+		<h1>Timeline de {{ user.name }} {{ user.surname }}</h1>
+		<small>{{ user.mail }}</small>
+		{% if app.user.id == user.id %}<a href="{{ path('reportUserSkills') }}" class="btn btn-warning" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Exportez vos compétences</a>{% endif %}
+	</div>
 
+	<div id="timeline-embed"></div>
 
 	<div id="person" class="modal fade">
 		<div class="modal-dialog">
@@ -62,75 +64,75 @@
 
 
 
-    <script type="text/javascript">
-	    var timeline_config = {
-		    width: "100%",
-		    height: "550",
-		    debug: true,
-		    lang: 'fr',
-		    source: {{ timeLine|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
-	    };
-	    function ajoutEvent(){
-		    $('.validUser').unbind('click').click(function(){
-			    var input = $(this);
-			    $(input).next().fadeIn();
-			    $.ajax({
-				    type: "GET",
-				    url: $(this).data('url'),
-				    dataType: "json",
-				    success : function(response)
-				    {
-					    if(response.status){
-						    $(input).addClass('btn-success').addClass('checked').removeClass('btn-info').val('+1');
-						    $(input).next().fadeOut();
-						    $(input).next().next().text(response.count);
-						    changeHover();
-					    }else{
-						    $(input).addClass('btn-info').removeClass('btn-success').removeClass('btn-danger').removeClass('checked').val('+1');
-						    $(input).next().fadeOut();
-						    $(input).next().next().text(response.count);
-						    $(input).unbind('mouseenter mouseleave');
-						    changeHover();
-					    }
-				    }
-			    });
-		    });
-		    $('.badge').unbind('click').click(function(){
-			    var input = $(this);
-			    $(input).next().fadeIn();
-			    $.ajax({
-				    type: "GET",
-				    url: $(this).data('url'),
-				    dataType: "json",
-				    success : function(response)
-				    {
-					    if(response){
-						    var persons = response.person;
-						    $("#personlist").empty();
-						    var personlist = document.getElementById("personlist");
+	<script type="text/javascript">
+		var timeline_config = {
+			width: "100%",
+			height: "550",
+			debug: true,
+			lang: 'fr',
+			source: {{ timeLine|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
+		};
+		function ajoutEvent(){
+			$('.validUser').unbind('click').click(function(){
+				var input = $(this);
+				$(input).next().fadeIn();
+				$.ajax({
+					type: "GET",
+					url: $(this).data('url'),
+					dataType: "json",
+					success : function(response)
+					{
+						if(response.status){
+							$(input).addClass('btn-success').addClass('checked').removeClass('btn-info').val('+1');
+							$(input).next().fadeOut();
+							$(input).next().next().text(response.count);
+							changeHover();
+						}else{
+							$(input).addClass('btn-info').removeClass('btn-success').removeClass('btn-danger').removeClass('checked').val('+1');
+							$(input).next().fadeOut();
+							$(input).next().next().text(response.count);
+							$(input).unbind('mouseenter mouseleave');
+							changeHover();
+						}
+					}
+				});
+			});
+			$('.badge').unbind('click').click(function(){
+				var input = $(this);
+				$(input).next().fadeIn();
+				$.ajax({
+					type: "GET",
+					url: $(this).data('url'),
+					dataType: "json",
+					success : function(response)
+					{
+						if(response){
+							var persons = response.person;
+							$("#personlist").empty();
+							var personlist = document.getElementById("personlist");
 
-						    persons.forEach(function (person) {
-							    var li = document.createElement("li");
+							persons.forEach(function (person) {
+								var li = document.createElement("li");
 
-							    li.textContent = person;
-							    personlist.appendChild(li);
-						    });
-						    $('#person').modal('show');
-					    }else{
-						    console.log(response);
-					    }
-				    }
-			    });
-		    });
-		    changeHover();
-	    }
-	    function changeHover(){
-		    $('.validUser.checked').unbind('mouseenter mouseleave').hover(function(){
-			    $(this).addClass('btn-danger').removeClass('btn-success').val('-1');
-		    }, function(){
-			    $(this).removeClass('btn-danger').addClass('btn-success').val('+1');
-		    });
-	    }
-    </script>
-    <script type="text/javascript" src="{{ asset('bundles/app/js/timeline/storyjs-embed.js') }}"></script>
+								li.textContent = person;
+								personlist.appendChild(li);
+							});
+							$('#person').modal('show');
+						}else{
+							console.log(response);
+						}
+					}
+				});
+			});
+			changeHover();
+		}
+		function changeHover(){
+			$('.validUser.checked').unbind('mouseenter mouseleave').hover(function(){
+				$(this).addClass('btn-danger').removeClass('btn-success').val('-1');
+			}, function(){
+				$(this).removeClass('btn-danger').addClass('btn-success').val('+1');
+			});
+		}
+	</script>
+	<script type="text/javascript" src="{{ asset('bundles/app/js/timeline/storyjs-embed.js') }}"></script>
 {% endblock %}
