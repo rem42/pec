@@ -1,20 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pdf SYSTEM "%resources%/dtd/doctype.dtd">
-<pdf>
-    <dynamic-page>
-        <div>
-            <p><h1>Liste des compétences de {{ user.name }} {{ user.surname }}</h1></p>
 
-            <ul>
-                {% set previous_cat = '' %}
-                {% for userSkillCategory in userSkillsCategories %}
-                    {% if previous_cat != userSkillCategory.sc_name %}
-                        {% set previous_cat = userSkillCategory.sc_name %}
-                        <li>{{ userSkillCategory.sc_name }}</li>
-                    {% endif %}
-                    {{ userSkillCategory.s_name }}
-                {% endfor %}
-            </ul>
+<!DOCTYPE pdf SYSTEM "%resources%/dtd/doctype.dtd">
+
+<pdf>
+
+    <dynamic-page>
+
+        <div>
+
+            <h1 style="color:#009688;">{{ user.name }} {{ user.surname }}</h1>
+            <h3 style="color:#009688;margin-top:-10px;">{{ user.mail }}</h3>
+
         </div>
+
+        <div style="margin-top: 20px;">
+
+                {% set previous_cat = '' %}
+
+                {% for userSkillCategory in userSkillsCategories %}
+
+                    {% if previous_cat != userSkillCategory.sc_name %}
+
+                        {% set previous_cat = userSkillCategory.sc_name %}
+
+                        <div style="background-color:#009688;width:400px;margin-bottom:15px;">
+
+                            <h2 style="color:#ffffff;padding-left:10px;">{{ userSkillCategory.sc_name }}</h2>
+
+                        </div>
+
+                    {% endif %}
+
+                        {% if loop.index % 2 == 0  %}
+
+                            <p style="background-color:#03a9f4;color:#ffffff;margin-left:60px;margin-right:60px;padding-left:10px;margin-bottom:2px;">{{ userSkillCategory.s_name }} - Acquise entre le {{ userSkillCategory.su_dateStart.date | date("d/m/Y") }} et le {{ userSkillCategory.su_dateEnd.date | date("d/m/Y") }}</p>
+
+                        {% else %}
+
+                            <p style="background-color:#03A9C7;color:#ffffff;margin-left:60px;margin-right:60px;padding-left:10px;margin-bottom:2px;">{{ userSkillCategory.s_name }} - Acquise entre le {{ userSkillCategory.su_dateStart.date | date("d/m/Y") }} et le {{ userSkillCategory.su_dateEnd.date | date("d/m/Y") }}</p>
+
+                        {% endif %}
+
+                {% endfor %}
+
+        </div>
+
     </dynamic-page>
+
 </pdf>
