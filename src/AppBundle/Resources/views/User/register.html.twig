@@ -1,68 +1,66 @@
 {% extends "::base.html.twig" %}
 {% block title %}PEC - Inscription{% endblock %}
 {% block body %}
+	<div class="row-fluid">
+		<div class="col-md-8 col-md-offset-2">
+			<h1>Inscription</h1>
 
-    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+			{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
+			{{ form_start(form) }}
+			{{ form_errors(form) }}
 
-<style>
+			<style>
 
+				.formElement{
+					margin-top: 2%;
+					font-size: 1.2em;
+				}
+			</style>
+			<div class="form">
 
-    .form{
-        margin-top: 10%;
-    }
+				<div class="formElement">
 
-    .formElement{
-        margin-top: 2%;
-        font-size: 1.2em;
-    }
-</style>
-    <div class="container">
-    <div class="form">
+					{{ form_label(form.name) }}
+					{{ form_errors(form.name) }}
+					{{ form_widget(form.name) }}
+				</div>
+				<div class="formElement">
 
-    <div class="formElement">
+					{{ form_label(form.surname) }}
+					{{ form_errors(form.surname) }}
+					{{ form_widget(form.surname) }}
+				</div>
+				<div class="formElement">
 
-    {{ form_label(form.name) }}
-        {{ form_errors(form.name) }}
-        {{ form_widget(form.name) }}
-    </div>
-    <div class="formElement">
+					{{ form_label(form.username) }}
+					{{ form_errors(form.username) }}
+					{{ form_widget(form.username) }}
+				</div>
+				<div class="formElement">
 
-    {{ form_label(form.surname) }}
-        {{ form_errors(form.surname) }}
-        {{ form_widget(form.surname) }}
-    </div>
-    <div class="formElement">
+					{{ form_label(form.mail) }}
+					{{ form_errors(form.mail) }}
+					{{ form_widget(form.mail) }}
+				</div>
+				<div class="formElement">
 
-    {{ form_label(form.username) }}
-        {{ form_errors(form.username) }}
-        {{ form_widget(form.username) }}
-    </div>
-    <div class="formElement">
+					{{ form_label(form.password.first) }}
+					{{ form_errors(form.password.first) }}
+					{{ form_widget(form.password.first) }}
+				</div>
+				<div class="formElement">
 
-    {{ form_label(form.mail) }}
-        {{ form_errors(form.mail) }}
-        {{ form_widget(form.mail) }}
-    </div>
-    <div class="formElement">
+					{{ form_label(form.password.second) }}
+					{{ form_errors(form.password.second) }}
+					{{ form_widget(form.password.second) }}
+				</div>
 
-    {{ form_label(form.password.first) }}
-        {{ form_errors(form.password.first) }}
-        {{ form_widget(form.password.first) }}
-    </div>
-    <div class="formElement">
+				{{ form_label(form.send) }}
+				{{ form_widget(form.send) }}
 
-    {{ form_label(form.password.second) }}
-        {{ form_errors(form.password.second) }}
-        {{ form_widget(form.password.second) }}
-    </div>
-
-        {{ form_label(form.send) }}
-        {{ form_widget(form.send) }}
-
-    </div>
-    {{ form_end(form) }}
-
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
 {% endblock %}
