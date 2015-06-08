@@ -21,7 +21,10 @@ class SkillAddType extends AbstractType{
                 'label'=>'Image'
             ])
             ->add('send', 'submit', [
-                'label'=>'Ajouter'
+                'label'=>'Ajouter',
+                'attr' => [
+                    'class' => 'btn-success'
+                ]
             ]);
     }
     public function getName()
