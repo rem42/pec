@@ -20,6 +20,7 @@ class SkillController extends Controller{
 
         if ($form->isValid()) {
             $this->get('appbundle.repository.skill')->save($skill);
+            return $this->redirect($this->generateUrl('addskill'));
         }elseif($form->isSubmitted()){
             $error = true;
         }

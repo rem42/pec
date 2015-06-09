@@ -2,7 +2,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Skill;
-use AppBundle\Entity\SkillUser;
 use AppBundle\Form\Type\ChangePersonalDataType;
 use AppBundle\Form\Type\ChangeProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\UserRegisterType;
 use AppBundle\Form\Type\ChangePasswordType;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Form\FormError;
 
 
@@ -47,11 +45,15 @@ class UserController extends Controller{
 
             $message = \Swift_Message::newInstance()
                 ->setSubject('Hello Email')
-                ->setFrom('moi@moi.fr')
+                ->setFrom($this->get('service_container')->getParameter('mailer_user'))
                 ->setTo($user->getMail())
                 ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_validation', array('token' => $user->getToken()), true))
             ;
-            $this->get('mailer')->send($message);
+            $validation_account = null;
+            if(!$this->get('mailer')->send($message)){
+                $user->setIsActivated(true);
+                $validation_account = true;
+            }
 
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($user);
@@ -67,7 +69,8 @@ class UserController extends Controller{
             //$this->get('security.token_storage')->setToken($token);
 
             return $this->render('AppBundle:Security:login.html.twig', array(
-                'mail_send' => true
+                'mail_send' => true,
+                'validation_account' => $validation_account
             ));
         }
 
@@ -103,13 +106,12 @@ class UserController extends Controller{
                 $password = $encoder->encodePassword($password['password']['first'], $user->getSalt());
                 $user->setPassword($password);
 
-                $em->merge($user);
-                $em->flush();
+                $this->get('appbundle.repository.user')->save($user);
 
                 $profileUpdate = true;
             }else{
                 //d($formChangePassword->getErrorsAsString());
-                //return $this->redirect($this->generateUrl('home')."#modifier");
+                //return $this->redirect($this->generateUrl('profil')."#modifier", [ 'formChangePassword' => $formChangePassword->createView()]);
             }
         }
 
@@ -127,8 +129,8 @@ class UserController extends Controller{
                 $user->setSurname($data['surname']);
                 $user->setUsername($data['username']);
                 $user->setMail($data['mail']);
-                $em->merge($user);
-                $em->flush();
+
+                $this->get('appbundle.repository.user')->save($user);
 
                 $profileUpdate = true;
             }
@@ -146,15 +148,14 @@ class UserController extends Controller{
 
                 if(!empty($data['isPrivate'])) {
                     if($user->getIsPrivate()) {
-                        $user->setIsPrivate(0);
+                        $user->setIsPrivate(false);
                     }
                     else {
-                        $user->setIsPrivate(1);
+                        $user->setIsPrivate(true);
                     }
                 }
 
-                $em->merge($user);
-                $em->flush();
+                $this->get('appbundle.repository.user')->save($user);
 
                 $profileUpdate = true;
             }
@@ -254,43 +255,43 @@ class UserController extends Controller{
         $user = $this->get('appbundle.repository.user')->loadUserByToken($token);
 
         if($user) {
-            $this->get('appbundle.repository.user')->validationAccount($user);
-            return $this->render('AppBundle:Security:login.html.twig', array(
-                'validation_account' => true
-            ));
+            $user->setToken(null);
+            $user->setIsActivated(true);
+            $this->get('appbundle.repository.user')->save($user);
+            $validation_account = true;
         }
         else {
-            return $this->render('AppBundle:Security:login.html.twig', array(
-                'validation_account' => false
-            ));
+            $validation_account = false;
         }
+        return $this->render('AppBundle:Security:login.html.twig', array(
+            'validation_account' => $validation_account
+        ));
     }
 
     public function lostPasswordAction(Request $request){
 
-        $em = $this->getDoctrine()->getManager();
-
         $user = $this->get('appbundle.repository.user')->loadUserByEmail($request->get('email'));
         if($user) {
 
-            //$message = \Swift_Message::newInstance()
-            //    ->setSubject("Demande d'un nouveau mot de passe")
-            //    ->setFrom('moi@moi.fr')
-            //    ->setTo($email)
-            //    ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_new_password', array('token' => $user->getToken()), true))
-            //;
-            //$this->get('mailer')->send($message);
+            $message = \Swift_Message::newInstance()
+                ->setSubject("Demande d'un nouveau mot de passe")
+                ->setFrom($this->get('service_container')->getParameter('mailer_user'))
+                ->setTo($user->getMail())
+                ->setBody("Validez votre compte avec le lien ci-après :" . $this->generateUrl('public_new_password', array('token' => $user->getToken()), true))
+            ;
+            if(!$this->get('mailer')->send($message)){
+
+            }
 
             $user->setToken(uniqid("", true));
-            $em->merge($user);
-            $em->flush();
+            $this->get('appbundle.repository.user')->save($user);
         }
         else {
 
-            return new Response(0);
+            return new Response(false);
         }
 
-        return new Response(1);
+        return new Response(true);
     }
 
     public function newPasswordAction(Request $request, $token){

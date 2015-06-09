@@ -19,6 +19,7 @@ class SkillCategoryController extends Controller{
 
         if ($form->isValid()) {
             $this->get('appbundle.repository.skillcategory')->save($skillCategory);
+            return $this->redirect($this->generateUrl('addskillcategory'));
         }
 
         $skillcategories = $this->get('appbundle.repository.skillcategory')->liste();
@@ -56,8 +57,4 @@ class SkillCategoryController extends Controller{
             return $this->redirect($this->generateUrl('addskillcategory'));
         }
     }
-
-    /*public function profileAction(){
-        return $this->render('AppBundle:User:profile.html.twig', array());
-    }*/
 }

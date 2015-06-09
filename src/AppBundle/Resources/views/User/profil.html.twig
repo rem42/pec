@@ -68,7 +68,9 @@
 
                 <h2>Mot de passe</h2>
 
-                {{ form(formChangePassword) }}
+	            <form method="post" action="{{ path('profil') }}#modifier">
+	                {{ form_widget(formChangePassword) }}
+	            </form>
 
             </div>
 

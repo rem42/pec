@@ -93,12 +93,4 @@ class UserRepository implements UserProviderInterface{
             ->setParameter('string',$string.'%')
             ->getArrayResult();
     }
-
-    public function validationAccount(User $user) {
-        $user->setToken(null);
-        $user->setIsActivated(true);
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-    }
-
 }
