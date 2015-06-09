@@ -34,7 +34,8 @@
 	<div id="haut-timeline" >
 		<h1>Timeline de {{ user.name }} {{ user.surname }}</h1>
 		<small>{{ user.mail }}</small>
-		{% if app.user.id == user.id %}<a href="{{ path('reportUserSkills') }}" class="btn btn-warning" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Exportez vos compétences</a>{% endif %}
+		{% if app.user.id is defined %}
+		{% if app.user.id == user.id %}<a href="{{ path('reportUserSkills') }}" class="btn btn-warning" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Exportez vos compétences</a>{% endif %}{% endif %}
 	</div>
 
 	<div id="timeline-embed"></div>
