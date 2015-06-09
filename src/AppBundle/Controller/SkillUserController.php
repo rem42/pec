@@ -28,6 +28,7 @@ class SkillUserController extends Controller{
 
             if(!$existSkillUser){
                 $this->get('appbundle.repository.skilluser')->save($skillUser);
+                return $this->redirect($this->generateUrl('userSkills'));
             }else{
                 $form->get('skill')->addError(new FormError('Vous avez déjà cette compétence.'));
                 $error = true;
