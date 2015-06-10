@@ -9,12 +9,19 @@ class SkillEditType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'text')
+        $builder->add('name', 'text', [
+            'label' => 'Nom',
+            ])
             ->add('skillCategory', 'entity', [
                 'class' => 'AppBundle\Entity\SkillCategory',
                 'property' => 'name',
+                'label' => 'Catégorie',
             ])
-            ->add('send', 'submit');
+            ->add('Modifier', 'submit', [
+                'attr' => [
+                    'class' => 'btn-success'
+                ]
+            ]);
     }
     public function getName()
     {

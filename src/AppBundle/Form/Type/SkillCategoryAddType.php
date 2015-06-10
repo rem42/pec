@@ -12,7 +12,7 @@ class SkillCategoryAddType extends AbstractType{
         $builder->add('name', 'text', [
             'label' => 'Nom'
         ])
-            ->add('send', 'submit', [
+            ->add('Valider', 'submit', [
                 'attr' => [
                     'class' => 'btn-success'
                 ]
