@@ -28,9 +28,17 @@
         <field name="createdAt" column="created_at" type="datetime" nullable="true" />
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
 
-        <one-to-many target-entity="UserSkillValidation" mapped-by="user" field="userSkillsValidation" />
+        <one-to-many target-entity="UserSkillValidation" mapped-by="user" field="userSkillsValidation">
+            <cascade>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
 
-        <one-to-many target-entity="SkillUser" mapped-by="user" field="skillsUser" />
+        <one-to-many target-entity="SkillUser" mapped-by="user" field="skillsUser" >
+            <cascade>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
 
         <many-to-one field="userCategory" target-entity="UserCategory" inversed-by="users" >
             <join-column name="user_category_id" />
