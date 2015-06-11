@@ -18,7 +18,7 @@ class SkillUserRepository{
     public function loadById($id){
         return $this->entityManager
             ->getRepository("AppBundle:SkillUser")
-            ->findOneBy(["id" => $id])
+            ->findOneBy(array("id" => $id))
         ;
     }
 

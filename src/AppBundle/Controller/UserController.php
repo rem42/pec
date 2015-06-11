@@ -31,7 +31,7 @@ class UserController extends Controller{
 
             if (preg_match('/etu.univ-lyon1/', $user->getMail()) || preg_match('/univ-lyon1/', $user->getMail())) {
                 if(!preg_match('/etu.univ-lyon1/', $user->getMail())) {
-                    $user->setRoles(['ROLE_ADMIN']);
+                    $user->setRoles(array('ROLE_ADMIN'));
                     $user->setIsPrivate(true);
                 }
             }
@@ -217,25 +217,25 @@ class UserController extends Controller{
                 }
             }
             $text .= '<span class="badge" data-url="'.$this->generateUrl('profil_public_info', array("id" => $us["su_id"])).'">'.$us["vote"].'</span>';
-            $skills[] = [
+            $skills[] = array(
                 'startDate' => $us["su_dateStart"]->format('m/d/Y'),
                 'endDate' => $us["su_dateEnd"]->format('m/d/Y'),
                 'text' => $us["sc_name"].$text,
                 'headline' => $us["s_name"],
-                'asset' => [
+                'asset' => array(
                     'media' => $skill->getWebPath(),
                     'thumbnail' => $skill->getWebPath(),
-                ]
-            ];
+                )
+            );
         }
-        $timeLine = [
-            'timeline' => [
+        $timeLine = array(
+            'timeline' => array(
                 'headline' => "Cahier des compétences",
                 'type' => "default",
                 'startDate' => '2010',
                 'date' => $skills
-            ]
-        ];
+            )
+        );
 
         return $this->render('AppBundle:User:profilePublic.html.twig', array(
             'timeLine' => $timeLine,

@@ -19,14 +19,14 @@ class UserSkillValidationRepository {
     public function findOneByUserSkill(User $user, SkillUser $skillUser){
         return $user = $this->entityManager
             ->getRepository("AppBundle:UserSkillValidation")
-            ->findOneBy(["user" => $user, "userSkill" => $skillUser])
+            ->findOneBy(array("user" => $user, "userSkill" => $skillUser))
             ;
     }
 
     public function findById($id){
         return $user = $this->entityManager
             ->getRepository("AppBundle:UserSkillValidation")
-            ->findBy(["userSkill" => $id])
+            ->findBy(array("userSkill" => $id))
             ;
     }
 

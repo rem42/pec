@@ -28,7 +28,7 @@ class User implements UserInterface{
 
     function __construct()
     {
-        $this->roles = ['ROLE_USER'];
+        $this->roles = array('ROLE_USER');
         $this->userSkillsValidation = new ArrayCollection();
         $this->skillsUser = new ArrayCollection();
         $this->token = uniqid("", true);

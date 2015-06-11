@@ -11,22 +11,22 @@ class ChangePasswordType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('password', 'repeated', [
+        $builder->add('password', 'repeated', array(
                 'type' => 'password',
                 'invalid_message' => 'Les mots de passe doivent correspondre',
-                'options' => ['required' => true],
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Mot de passe (validation)'],
-                'constraints' => [
+                'options' => array('required' => true),
+                'first_options'  => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Mot de passe (validation)'),
+                'constraints' => array(
                     new NotBlank(),
-                    new Length([
+                    new Length(array(
                         'min' => 8, 'max' => 20
-                    ])
-                ]
-            ])
-            ->add('Modifier mon mot de passe', 'submit', [
-                'attr' => ["class" => "btn-success"]
-            ])
+                    ))
+                )
+        ))
+            ->add('Modifier mon mot de passe', 'submit', array(
+                'attr' => array("class" => "btn-success")
+            ))
         ;
     }
     public function getName()

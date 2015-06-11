@@ -20,7 +20,7 @@ class SkillCategoryRepository{
     public function findById($id){
         return $this->entityManager
             ->getRepository("AppBundle:SkillCategory")
-            ->findOneBy(["id" => $id])
+            ->findOneBy(array("id" => $id))
         ;
     }
 

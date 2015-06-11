@@ -71,7 +71,7 @@
 			height: "550",
 			debug: true,
 			lang: 'fr',
-			source: {{ timeLine|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
+			source: {{ timeLine|json_encode|raw }}
 		};
 		function ajoutEvent(){
 			$('.validUser').unbind('click').click(function(){

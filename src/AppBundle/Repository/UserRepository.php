@@ -20,7 +20,7 @@ class UserRepository implements UserProviderInterface{
     {
         $user = $this->entityManager
             ->getRepository("AppBundle:User")
-            ->findOneBy(["username" => $username])
+            ->findOneBy(array("username" => $username))
         ;
 
         if (null === $user) {
@@ -41,7 +41,7 @@ class UserRepository implements UserProviderInterface{
     public function loadUserById($id){
         $user = $this->entityManager
             ->getRepository("AppBundle:User")
-            ->findOneBy(["id" => $id])
+            ->findOneBy(array("id" => $id))
         ;
 
         if (null === $user) {
